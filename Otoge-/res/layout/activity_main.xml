@@ -21,6 +21,7 @@
             android:rowCount="4" >
 
             <FrameLayout
+                android:id="@+id/frameLayout2"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -35,6 +36,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout3"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -49,6 +51,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout4"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -63,6 +66,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout5"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -77,6 +81,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout6"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -91,6 +96,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout7"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -105,6 +111,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout8"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -119,6 +126,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout9"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -133,6 +141,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout10"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -147,6 +156,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout11"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -161,6 +171,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout12"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -175,6 +186,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout13"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -189,6 +201,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout14"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -203,6 +216,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout15"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -217,6 +231,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout16"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -231,6 +246,7 @@
             </FrameLayout>
 
             <FrameLayout
+                android:id="@+id/frameLayout17"
                 android:layout_width="57dp"
                 android:layout_height="57dp"
                 android:layout_gravity="center"
@@ -249,64 +265,80 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical" >
-
-        <ImageButton
-            android:id="@+id/StartButton1"
-            android:layout_width="120dp"
-            android:layout_height="24dp"
-            android:src="@drawable/startbutton01" />
-
-        <ImageButton
-            android:id="@+id/StayButton1"
-            android:layout_width="120dp"
-            android:layout_height="24dp"
-            android:src="@drawable/staybutton01" />
-        
-        <ImageButton
-            android:id="@+id/ReturnButton1"
-            android:layout_width="120dp"
-            android:layout_height="24dp"
-            android:src="@drawable/returnbutton01" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:orientation="vertical" >
 
         <FrameLayout
             android:layout_width="135dp"
-            android:layout_height="50dp"
+            android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="@drawable/txtback01" >
 
             <TextView
                 android:id="@+id/score_txt01"
                 android:layout_width="120dp"
-                android:layout_height="45dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
+                android:textColor="#ffffffff"
                 android:text="ここにスコアを表示" />
         </FrameLayout>
 
         <FrameLayout
             android:layout_width="135dp"
-            android:layout_height="50dp"
+            android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="@drawable/txtback01" >
 
             <TextView
                 android:id="@+id/combo_txt01"
                 android:layout_width="120dp"
-                android:layout_height="45dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
+                android:textColor="#ffffffff"
                 android:text="ここにコンボを表示" />
         </FrameLayout>
+            
+        <FrameLayout
+            android:layout_width="135dp"
+            android:layout_height="47dp"
+            android:layout_gravity="center"
+            android:background="@drawable/txtback01" >
+
+            <TextView
+                android:id="@+id/value_txt01"
+                android:layout_width="120dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:textColor="#ffffffff"
+                android:text="ここにバリューを表示" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/StartButton1"
+            android:layout_width="135dp"
+            android:layout_height="28dp"
+            android:src="@drawable/startbutton01" />
+
+        <ImageButton
+            android:id="@+id/StayButton1"
+            android:layout_width="135dp"
+            android:layout_height="28dp"
+            android:src="@drawable/staybutton01" />
+
+        <ImageButton
+            android:id="@+id/ReturnButton1"
+            android:layout_width="135dp"
+            android:layout_height="28dp"
+            android:src="@drawable/returnbutton01" />
     </LinearLayout>
 
 </RelativeLayout>
