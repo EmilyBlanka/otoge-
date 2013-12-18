@@ -7,16 +7,18 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
+import android.widget.Button;
 //import android.widget.Button;
 import android.widget.ImageButton;
 
 public class MainActivity extends Activity implements OnTouchListener {
 	
-	ImageButton BD_button, snare_button, hihat_button, open_button,			//一段目
-			    clap_button, bassline_button, tom1_button, tom2_button,		//二段目
-			    BD2_button, snare2_button, ride_button, crash_button,		//三段目
-			    perc_button, splash_button, SFX_button, triangle_button,	//四段目
-			    start_button, stay_button, return_button;		
+		Button BD_button, snare_button, hihat_button, open_button,			//一段目
+			   clap_button, bassline_button, tom1_button, tom2_button,		//二段目
+		       BD2_button, snare2_button, ride_button, crash_button,		//三段目
+		       perc_button, splash_button, SFX_button, triangle_button;		//四段目
+	       
+		ImageButton	start_button, stay_button, return_button;		
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +27,25 @@ public class MainActivity extends Activity implements OnTouchListener {
 		setContentView(R.layout.activity_main);
 		
 		//一段目
-        BD_button = (ImageButton) findViewById(R.id.num_button1);
-        snare_button = (ImageButton) findViewById(R.id.ride01_button);
-        hihat_button = (ImageButton) findViewById(R.id.num_button3);
-        open_button = (ImageButton) findViewById(R.id.num_button4);
+        BD_button = (Button) findViewById(R.id.num_button1);
+        snare_button = (Button) findViewById(R.id.ride01_button);
+        hihat_button = (Button) findViewById(R.id.num_button3);
+        open_button = (Button) findViewById(R.id.num_button4);
         //二段目
-        clap_button = (ImageButton) findViewById(R.id.num_button5);
-        bassline_button = (ImageButton) findViewById(R.id.bd01_button);
-        tom1_button = (ImageButton) findViewById(R.id.kick_button);
-        tom2_button = (ImageButton) findViewById(R.id.tom123_button);
+        clap_button = (Button) findViewById(R.id.num_button5);
+        bassline_button = (Button) findViewById(R.id.bd01_button);
+        tom1_button = (Button) findViewById(R.id.kick_button);
+        tom2_button = (Button) findViewById(R.id.tom123_button);
         //三段目
-        BD2_button = (ImageButton) findViewById(R.id.num_button9);
-        snare2_button = (ImageButton) findViewById(R.id.sn01_button);
-        ride_button = (ImageButton) findViewById(R.id.sn02_button);
-        crash_button = (ImageButton) findViewById(R.id.clach_button);
+        BD2_button = (Button) findViewById(R.id.num_button9);
+        snare2_button = (Button) findViewById(R.id.sn01_button);
+        ride_button = (Button) findViewById(R.id.sn02_button);
+        crash_button = (Button) findViewById(R.id.clach_button);
         //四段目
-        perc_button = (ImageButton) findViewById(R.id.num_button13);
-        splash_button = (ImageButton) findViewById(R.id.num_button14);
-        SFX_button = (ImageButton) findViewById(R.id.num_button15);
-        triangle_button = (ImageButton) findViewById(R.id.clap_button);
+        perc_button = (Button) findViewById(R.id.num_button13);
+        splash_button = (Button) findViewById(R.id.num_button14);
+        SFX_button = (Button) findViewById(R.id.num_button15);
+        triangle_button = (Button) findViewById(R.id.clap_button);
         
         start_button = (ImageButton) findViewById(R.id.StartButton1);
         stay_button = (ImageButton) findViewById(R.id.StayButton1);
