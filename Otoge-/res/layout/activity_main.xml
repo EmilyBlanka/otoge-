@@ -1,390 +1,322 @@
-<!-- <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" > -->
- 	
+    android:background="@android:color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
     <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-   		xmlns:tools="http://schemas.android.com/tools"
-   	    android:layout_width="fill_parent"
-  	    android:layout_height="fill_parent"
-        android:background="@drawable/back_img02" >
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+         >
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="160dp"
             android:layout_height="wrap_content"
-            android:layout_marginRight="3dp"
             android:orientation="vertical" >
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
+            <ImageButton
+                android:id="@+id/StartButton1"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:src="@drawable/startbutton01" />
 
-                <ImageButton
-                    android:id="@+id/StartButton1"
-                    android:layout_width="135dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/startbutton01" />
+            <ImageButton
+                android:id="@+id/StayButton1"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:layout_gravity="center"
+                android:src="@drawable/staybutton01" />
 
-                <ImageButton
-                    android:id="@+id/StayButton1"
-                    android:layout_width="135dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/staybutton01" />
-
-                <ImageButton
-                    android:id="@+id/ReturnButton1"
-                    android:layout_width="135dp"
-                    android:layout_height="28dp"
-                    android:src="@drawable/returnbutton01" />
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/ReturnButton1"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:src="@drawable/returnbutton01" />
 
             <ScrollView
                 android:id="@+id/scrollView1"
-                android:layout_width="135dp"
-                android:layout_height="58dp"
-                android:layout_gravity="center" >
+                android:layout_width="match_parent"
+                android:layout_height="51dp" >
 
                 <LinearLayout
-                    android:layout_width="135dp"
-                    android:layout_height="58dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical" >
 
                     <Button
                         android:id="@+id/button1"
-                        android:layout_width="135dp"
-                        android:layout_height="58dp"
-                        android:layout_gravity="center"
-                        android:text="MUSIC A" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button" />
 
                     <Button
                         android:id="@+id/button2"
-                        android:layout_width="135dp"
-                        android:layout_height="58dp"
-                        android:layout_gravity="center"
-                        android:text="MUSIC B" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button" />
 
                     <Button
                         android:id="@+id/button3"
-                        android:layout_width="135dp"
-                        android:layout_height="58dp"
-                        android:layout_gravity="center"
-                        android:text="MUSIC C" />
-
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Button" />
                 </LinearLayout>
             </ScrollView>
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/speaker01" />
         </LinearLayout>
 
         <FrameLayout
             android:id="@+id/frameLayout1"
-            android:layout_width="255dp"
-            android:layout_height="255dp"
+            android:layout_width="256dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:background="@drawable/back_img01" >
 
             <GridLayout
                 android:id="@+id/gridLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:columnCount="4"
                 android:rowCount="4" >
 
-                <FrameLayout
-                    android:id="@+id/frameLayout2"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
+                <FrameLayout 
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
-
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button1"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout3"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/ride01_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout4"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button3"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout5"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button4"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout6"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button5"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout7"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/bd01_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout8"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/kick_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout9"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/tom123_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout10"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button9"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout11"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/sn01_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout12"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/sn02_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout13"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/clach_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout14"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button13"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout15"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button14"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout16"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/num_button15"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
 
                 <FrameLayout
-                    android:id="@+id/frameLayout17"
-                    android:layout_width="57dp"
-                    android:layout_height="57dp"
                     android:layout_gravity="center"
                     android:background="@drawable/button_back" >
 
-                    <ImageButton
+                    <Button
                         android:id="@+id/clap_button"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/button02" />
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center" />
+
                 </FrameLayout>
+
             </GridLayout>
         </FrameLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
             android:orientation="vertical" >
 
-            <FrameLayout
-                android:layout_width="135dp"
-                android:layout_height="47dp"
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/txtback01" >
+                android:background="@drawable/txtback01"
+                android:text="ここにスコアを表示"
+                android:textColor="#ffffffff" />
 
-                <TextView
-                    android:id="@+id/score_txt01"
-                    android:layout_width="120dp"
-                    android:layout_height="42dp"
-                    android:layout_gravity="center"
-                    android:text="ここにスコアを表示"
-                    android:textColor="#ffffffff" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="135dp"
-                android:layout_height="47dp"
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/txtback01" >
+                android:background="@drawable/txtback01"
+                android:text="ここにコンボを表示"
+                android:textColor="#ffffffff" />
 
-                <TextView
-                    android:id="@+id/combo_txt01"
-                    android:layout_width="120dp"
-                    android:layout_height="42dp"
-                    android:layout_gravity="center"
-                    android:text="ここにコンボを表示"
-                    android:textColor="#ffffffff" />
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="135dp"
-                android:layout_height="47dp"
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
-                android:background="@drawable/txtback01" >
+                android:background="@drawable/txtback01"
+                android:text="ここにバリューを表示"
+                android:textColor="#ffffffff" />
 
-                <TextView
-                    android:id="@+id/value_txt01"
-                    android:layout_width="120dp"
-                    android:layout_height="42dp"
-                    android:layout_gravity="center"
-                    android:text="ここにバリューを表示"
-                    android:textColor="#ffffffff" />
-            </FrameLayout>
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/speaker01" />
         </LinearLayout>
-
     </LinearLayout>
 
-<!-- </RelativeLayout> -->
+</RelativeLayout>
