@@ -13,10 +13,10 @@ import android.widget.ImageButton;
 public class MainActivity extends Activity implements OnTouchListener {
 	
 	ImageButton BD_button, snare_button, hihat_button, open_button,			//一段目
-		   clap_button, bassline_button, tom1_button, tom2_button,		//二段目
-		   BD2_button, snare2_button, ride_button, crash_button,		//三段目
-		   perc_button, splash_button, SFX_button, triangle_button,		//四段目
-		   start_button, stay_button, return_button;		
+			    clap_button, bassline_button, tom1_button, tom2_button,		//二段目
+			    BD2_button, snare2_button, ride_button, crash_button,		//三段目
+			    perc_button, splash_button, SFX_button, triangle_button,	//四段目
+			    start_button, stay_button, return_button;		
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +69,11 @@ public class MainActivity extends Activity implements OnTouchListener {
         splash_button.setOnTouchListener(this);
         SFX_button.setOnTouchListener(this);
         triangle_button.setOnTouchListener(this);
+        
+        start_button.setOnTouchListener(this);
+        stay_button.setOnTouchListener(this);
+        return_button.setOnTouchListener(this);
+
     }
 
 
