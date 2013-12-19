@@ -10,19 +10,24 @@
             android:orientation="vertical" >
             <ImageButton
                 android:id="@+id/StartButton1"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="1dp"
                 android:src="@drawable/startbutton01" />
             <ImageButton
                 android:id="@+id/StayButton1"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:padding="1dp"
                 android:src="@drawable/staybutton01" />
             <ImageButton
                 android:id="@+id/ReturnButton1"
-                android:layout_width="match_parent"
-                android:layout_height="33dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:padding="1dp"
                 android:src="@drawable/returnbutton01" />
             <ScrollView
                 android:id="@+id/scrollView1"
@@ -51,7 +56,7 @@
             </ScrollView>
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/speaker01" />
         </LinearLayout>
@@ -62,150 +67,214 @@
                 android:layout_centerInParent="true"
                 android:columnCount="4"
                 android:rowCount="4" >
-                <FrameLayout 
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button1"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/ride01_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/bd01_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/kick_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/tom123_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button9"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/sn01_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/sn02_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/clach_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button13"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button14"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/num_button15"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
-                <FrameLayout
-                    android:layout_gravity="center"
-                    android:background="@drawable/button_back" >
-                    <Button
-                        android:id="@+id/clap_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center" />
-                </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/ride01_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/bd01_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/kick_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/tom123_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/sn01_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/sn02_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/clach_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button13"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button14"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/num_button15"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
+                    <FrameLayout android:layout_gravity="fill_horizontal" >
+                        <Button
+                            android:id="@+id/clap_button"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/button_back" />
+                        <ImageView
+				            android:id="@+id/imageView1"
+				            android:layout_width="wrap_content"
+				            android:layout_height="wrap_content"
+				            android:layout_centerInParent="true"
+				            android:src="@drawable/anim_button" />
+                    </FrameLayout>
             </GridLayout>
         <LinearLayout
             android:layout_width="wrap_content"
@@ -220,6 +289,10 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/txtback01"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
                 android:text="ここにスコアを表示"
                 android:textColor="#ffffffff" />
             <TextView
@@ -228,6 +301,10 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/txtback01"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
                 android:text="ここにコンボを表示"
                 android:textColor="#ffffffff" />
             <TextView
@@ -236,11 +313,15 @@
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/txtback01"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:paddingLeft="7dp"
+                android:paddingRight="7dp"
                 android:text="ここにバリューを表示"
                 android:textColor="#ffffffff" />
             <ImageView
                 android:id="@+id/imageView1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/speaker01" />
         </LinearLayout>
