@@ -74,11 +74,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage1"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button" 
+				            android:visibility="invisible"/>
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -87,11 +88,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage2"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -100,11 +102,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage3"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -113,11 +116,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage4"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -126,11 +130,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage5"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button" 
+				            android:visibility="invisible"/>
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -139,11 +144,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage6"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button" 
+				            android:visibility="invisible"/>
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -152,11 +158,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage7"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -165,11 +172,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage8"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -178,11 +186,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage9"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button" 
+				            android:visibility="invisible"/>
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -191,11 +200,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage10"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -204,11 +214,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage11"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -217,11 +228,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage12"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -230,11 +242,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage13"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -243,11 +256,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage14"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -256,11 +270,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage15"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
                     <FrameLayout android:layout_gravity="fill_horizontal" >
                         <Button
@@ -269,11 +284,12 @@
                             android:layout_height="wrap_content"
                             android:background="@drawable/button_back" />
                         <ImageView
-				            android:id="@+id/imageView1"
+				            android:id="@+id/TapImage16"
 				            android:layout_width="wrap_content"
 				            android:layout_height="wrap_content"
 				            android:layout_centerInParent="true"
-				            android:src="@drawable/anim_button" />
+				            android:src="@drawable/anim_button"
+				            android:visibility="invisible" />
                     </FrameLayout>
             </GridLayout>
         <LinearLayout

@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 //import android.widget.Button;
 import android.widget.ImageButton;
@@ -34,10 +35,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 	       
 		ImageButton	start_button, stay_button, return_button;		
 		
+		ImageView tap_button1,tap_button2,tap_button3,tap_button4,tap_button5,
+		tap_button6,tap_button7,tap_button8,tap_button9,tap_button10,tap_button11,
+		tap_button12,tap_button13,tap_button14,tap_button15,tap_button16;
+		
+		
 		private long justnow =0;  // 繰り返しの間隔（単位：msec）
 		int AniDly = 400; //ボタンのアニメーションが開始から終了までの間隔（単位：msec）
-		private long[] delay1={2327,5964,9600,16000,17000,18000,19000};
-		private long[] delay2={10509,11191,11873,12595,13236,13691,16000,17000,18000,19000};
+		private long[] delay1={2327,5964,9600,};
+		private long[] delay2={10509,11191,11873,12595,13236,13691,};
 		private long[] delay3={2555,6191,9827,10509,11191,11873,12595,13236,13691};
 		private long TouchTimeMillis;
 		private long StartTimeMillis;
@@ -110,6 +116,23 @@ public class MainActivity extends Activity implements OnTouchListener {
         stay_button = (ImageButton) findViewById(R.id.StayButton1);
         return_button = (ImageButton) findViewById(R.id.ReturnButton1);
       
+        tap_button1 = (ImageView) findViewById(R.id.TapImage1);
+        tap_button2 = (ImageView) findViewById(R.id.TapImage2);
+        tap_button3 = (ImageView) findViewById(R.id.TapImage3);
+        tap_button4 = (ImageView) findViewById(R.id.TapImage4);
+        tap_button5 = (ImageView) findViewById(R.id.TapImage5);
+        tap_button6 = (ImageView) findViewById(R.id.TapImage6);
+        tap_button7 = (ImageView) findViewById(R.id.TapImage7);
+        tap_button8 = (ImageView) findViewById(R.id.TapImage8);
+        tap_button9 = (ImageView) findViewById(R.id.TapImage9);
+        tap_button10 = (ImageView) findViewById(R.id.TapImage10);
+        tap_button10 = (ImageView) findViewById(R.id.TapImage11);
+        tap_button12 = (ImageView) findViewById(R.id.TapImage12);
+        tap_button13 = (ImageView) findViewById(R.id.TapImage13);
+        tap_button14 = (ImageView) findViewById(R.id.TapImage14);
+        tap_button15 = (ImageView) findViewById(R.id.TapImage15);
+        tap_button16 = (ImageView) findViewById(R.id.TapImage16);
+               
         bd_button.setOnTouchListener(this);
         snare_button.setOnTouchListener(this);
         hihat_button.setOnTouchListener(this);
@@ -147,7 +170,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 
         				//ボタン1のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay1.length; i++) {	
-        					TimerTask timerTask1 = new AnimationTask(MainActivity.this,handler,bd_button);
+        					TimerTask timerTask1 = new AnimationTask(MainActivity.this,handler,tap_button1);
         					timer.schedule(timerTask1, delay1[i]); 
         					
         					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data1);
@@ -159,7 +182,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         				
         				//ボタン2のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay2.length; i++) {	
-        					TimerTask timertask4 = new AnimationTask(MainActivity.this,handler,hihat_button);
+        					TimerTask timertask4 = new AnimationTask(MainActivity.this,handler,tap_button2);
         					timer.schedule(timertask4, delay2[i]); 
         					
         					TimerTask timerTask5 = new DataNoTask(MainActivity.this,handler,data2);
