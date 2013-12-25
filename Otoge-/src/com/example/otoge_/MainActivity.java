@@ -1,5 +1,6 @@
 package com.example.otoge_;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.media.AudioManager;
@@ -49,7 +50,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		private long[] delay5={};
 		//bd(2727)
 		/*private long[] delay6={700,1200,1700,2200,2700,3200};*/
-		private long[] delay6={2327,5964,9600,10509,11191,11873,12595,13236,13691,14145,15964,16418,17782,18009,18464,19145,19373,19827,21418,
+		private long[] delay6={2327,5964,9600,(10509/*+60*/),(11191/*+60*/),(11873/*+60*/),(12595/*+70*/),(13236/*+70*/),13691,14145,15964,16418,17782,18009,18464,19145,19373,19827,21418,
 		23236,23691,25055,25282,25736,26418,26645,27100,35055,35282,42327,42782,43236,45055,45736,46873,48691,50509,52327,53009,
 		54145,55964,56645,65054,65736,66873,67554,68691,69373,70509,71191};
 		//kick
@@ -74,13 +75,21 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		private long BGMTimeMillis;
 		private long ButtonTimeMillis;
-		private long AniTimeLag;
-		private long AniTimeLagSum;
+		private long AniTimeLag6;
+		private long AniTimeLag7;
+		private long AniTimeLag8;
+		private long AniTimeLag10;
+		private long AniTimeLag11;
+		private long AniTimeLag12;
+		private long AniTimeLag16;
 		private long TouchTimeMillis;
 		private long StartTimeMillis;
 		private long Time;
+		private long InterBGM=1000;
+		long scheduleSetLag =1;
+		long scheduleSetLagSum=0;
 		int score=0;
-		
+	
 		Timer timer =new Timer();
 		Handler handler;
 		
@@ -173,161 +182,163 @@ public class MainActivity extends Activity implements OnTouchListener {
         			@Override
         			public void onClick(View v) {
         				
+        				/*現在時刻を取得*/
+        				StartTimeMillis = System.currentTimeMillis();
+        				Date date = new Date(StartTimeMillis+InterBGM);
         				
         				// タイマー1をセット
         				TimerTask timerTask0 = new BGMTask(MainActivity.this,BGMTimeMillis);
-        				timer.schedule(timerTask0, 0);
+        				timer.schedule(timerTask0,date);
         				Log.d("bgm", "timerset");
         				
         				
         				//ボタン2のアニメーションタイマー・タスクのセット
-        				for(int i=0; i < delay2.length; i++) {	
-        					ButtonTimeMillis = System.currentTimeMillis();
-            				
-            				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-            				Log.d("aaaaaaaaa", String.valueOf(BGMTimeMillis));
-        					
-            				AniTimeLagSum +=AniTimeLag;
-            				/*Log.d("aaaaaaaaa", String.valueOf(AniTimeLagSum));*/
-        					
+        				for(int i=0; i < delay2.length; i++) {
         					TimerTask timerTask1 = new AnimationTask(MainActivity.this,handler,tap_button2);
-        					timer.schedule(timerTask1, delay2[i]/*-AniTimeLagSum*/); 
-        					Log.d("animation", "task");
+        					timer.schedule(timerTask1, delay2[i]+InterBGM-scheduleSetLagSum); 
+        					Log.d("ani", "2");
         					  					
         					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data2);
-        					timer.schedule(timerTask2, delay2[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask2, delay2[i] + InterBGM-scheduleSetLagSum + AniDly-(AniDly/2));
 
         					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data2);
-        					timer.schedule(timerTask3, delay2[i]+AniDly+(AniDly/2));
+        					timer.schedule(timerTask3, delay2[i] + InterBGM-scheduleSetLagSum +AniDly+(AniDly/2));
         					
-        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}	
+        				
+        				scheduleSetLagSum =0;
+        				
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag6 = ButtonTimeMillis- StartTimeMillis;
         				
         				//ボタン6のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay6.length; i++) {	
-        					ButtonTimeMillis = System.currentTimeMillis();
-        					
-        					AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-            				AniTimeLagSum +=AniTimeLag;
-            				/*Log.d("aaaaaaaaa", String.valueOf(delay6[i]-AniTimeLagSum));*/
-            				
         					TimerTask timertask4 = new AnimationTask(MainActivity.this,handler,tap_button6);
-        					timer.schedule(timertask4, delay6[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask4, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
+        					Log.d("ani", "6");
         					
         					TimerTask timerTask5 = new DataNoTask(MainActivity.this,handler,data6);
-        					timer.schedule(timerTask5, delay6[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask5, delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly-(AniDly/2));
 
         					TimerTask timerTask6 = new DataFlagTask(MainActivity.this,handler,data6);
-        					timer.schedule(timerTask6, delay6[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask6, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly+(AniDly/2));	
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}		
+        				
+        				scheduleSetLagSum =0;
+        				
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag7 = ButtonTimeMillis- StartTimeMillis;
         				
         				//ボタン7のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay7.length; i++) {	
-        					/*ButtonTimeMillis = System.currentTimeMillis();
-            				
-            				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-            				AniTimeLagSum +=AniTimeLag*/;
-            				
         					TimerTask timertask7 = new AnimationTask(MainActivity.this,handler,tap_button7);
-        					timer.schedule(timertask7, delay7[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask7, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
         					
         					TimerTask timerTask8 = new DataNoTask(MainActivity.this,handler,data7);
-        					timer.schedule(timerTask8, delay7[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask8, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask9 = new DataFlagTask(MainActivity.this,handler,data7);
-        					timer.schedule(timerTask9, delay7[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask9, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly+(AniDly/2));	
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}	
+        				
+        				scheduleSetLagSum =0;
+        				
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag8 = ButtonTimeMillis- StartTimeMillis;
         				
         				//ボタン8のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay8.length; i++) {	
-        					/*ButtonTimeMillis = System.currentTimeMillis();
-            				
-            				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-            				AniTimeLagSum +=AniTimeLag;*/
-        					
         					TimerTask timertask10 = new AnimationTask(MainActivity.this,handler,tap_button8);
-        					timer.schedule(timertask10, delay8[i]/*-AniTimeLagSum*/);
-
+        					timer.schedule(timertask10, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
+        					
         					TimerTask timerTask11 = new DataNoTask(MainActivity.this,handler,data8);
-        					timer.schedule(timerTask11, delay8[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask11, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask12 = new DataFlagTask(MainActivity.this,handler,data8);
-        					timer.schedule(timerTask12, delay8[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask12, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly+(AniDly/2));	
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}
+        				
+        				scheduleSetLagSum =0;
+        				
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag10 = ButtonTimeMillis- StartTimeMillis;
         				
         				//ボタン10のアニメーションタイマー・タスクのセット
         				for(int i=0; i < delay10.length; i++) {	
-        					/*ButtonTimeMillis = System.currentTimeMillis();
-            				
-            				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-            				AniTimeLagSum +=AniTimeLag;
-            				*/
         					TimerTask timertask13= new AnimationTask(MainActivity.this,handler,tap_button10);
-        					timer.schedule(timertask13, delay10[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask13, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
         					
         					TimerTask timerTask14 = new DataNoTask(MainActivity.this,handler,data10);
-        					timer.schedule(timerTask14, delay10[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask14, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask15 = new DataFlagTask(MainActivity.this,handler,data10);
-        					timer.schedule(timerTask15, delay10[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask15, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly+(AniDly/2));	
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}
+        				
+        				scheduleSetLagSum =0;
+        				
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag11 = ButtonTimeMillis- StartTimeMillis;
         				
         				//ボタン11のアニメーションタイマー・タスクのセット
-        				/*ButtonTimeMillis = System.currentTimeMillis();
-        				
-        				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-        				AniTimeLagSum +=AniTimeLag;*/
-        				
         				for(int i=0; i < delay11.length; i++) {	
         					TimerTask timertask16= new AnimationTask(MainActivity.this,handler,tap_button11);
-        					timer.schedule(timertask16, delay11[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask16, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
         					
         					TimerTask timerTask17 = new DataNoTask(MainActivity.this,handler,data11);
-        					timer.schedule(timerTask17, delay11[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask17, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask18 = new DataFlagTask(MainActivity.this,handler,data11);
-        					timer.schedule(timerTask18, delay11[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask18, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly+(AniDly/2));		
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}
         				
-        				//ボタン12のアニメーションタイマー・タスクのセット
-        				/*ButtonTimeMillis = System.currentTimeMillis();
+        				scheduleSetLagSum =0;
         				
-        				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-        				AniTimeLagSum +=AniTimeLag;*/
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag12 = ButtonTimeMillis- StartTimeMillis;
         				
         				for(int i=0; i < delay12.length; i++) {	
         					TimerTask timertask19= new AnimationTask(MainActivity.this,handler,tap_button12);
-        					timer.schedule(timertask19, delay12[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask19, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
         					
         					TimerTask timerTask20 = new DataNoTask(MainActivity.this,handler,data12);
-        					timer.schedule(timerTask20, delay12[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask20, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask21 = new DataFlagTask(MainActivity.this,handler,data12);
-        					timer.schedule(timerTask21, delay12[i]+AniDly+(AniDly/2));			
+        					timer.schedule(timerTask21, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly+(AniDly/2));		
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
         				}
         				
-        				//ボタン16のアニメーションタイマー・タスクのセット
-        				/*ButtonTimeMillis = System.currentTimeMillis();
+        				scheduleSetLagSum =0;
         				
-        				AniTimeLag = ButtonTimeMillis- BGMTimeMillis;
-        				AniTimeLagSum +=AniTimeLag;*/
-        				
-        				for(int i=0; i < delay16.length; i++) {	
+        				ButtonTimeMillis = System.currentTimeMillis();
+    					AniTimeLag16 = ButtonTimeMillis- StartTimeMillis;
+    					
+    					for(int i=0; i < delay16.length; i++) {	
         					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button16);
-        					timer.schedule(timertask22, delay16[i]/*-AniTimeLagSum*/); 
+        					timer.schedule(timertask22, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
         					
         					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data16);
-        					timer.schedule(timerTask23, delay16[i]+AniDly-(AniDly/2));
+        					timer.schedule(timerTask23, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly-(AniDly/2));
 
         					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data16);
-        					timer.schedule(timerTask24, delay16[i]+AniDly+(AniDly/2));			
-        				}
-        				
-        				//現在時刻を取得
-        				StartTimeMillis = System.currentTimeMillis();
-        				Log.d("system time","StartTimeMillis" );
-        				
-        				
+        					timer.schedule(timerTask24, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly+(AniDly/2));	
+        					
+        					scheduleSetLagSum =+ scheduleSetLag;
+        				}		
+    					scheduleSetLagSum =0;
         			}
         		});
     }
@@ -336,9 +347,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
 		
-		int GreLan =50;
-		int GodLan =100;
-		int BadLan =50;
+		int GreLan =80;
+		int GodLan =70;
+		int BadLan =45;
 		
 		String stringscore = String.valueOf(score);
 		TextView textView0 = (TextView) findViewById(R.id.textView1);
@@ -351,280 +362,294 @@ public class MainActivity extends Activity implements OnTouchListener {
 			switch (v.getId()) {
 			case R.id.TapButton2:
 				ride.play(sound_id2, 1.0F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data2.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data2.getFlag() ==1) {	
-					if( delay2[data2.getNo()]+AniDly-GreLan <= Time && Time <= delay2[data2.getNo()]+AniDly+GreLan ) {
+					if( delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan <= Time && Time <= delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay2[data2.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay2[data2.getNo()]+AniDly-GreLan)) {
+					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay2[data2.getNo()]+AniDly+GreLan) < Time && Time <= (delay2[data2.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan) < Time && Time <= (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay2[data2.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay2[data2.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan-BadLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay2[data2.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay2[data2.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data2.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;
 				
 			case R.id.TapButton6:
 				bd.play(sound_id6, 1.0F, 1.0F, 0, 0, 1.0F);
-				
+				scheduleSetLagSum =0;
 				if(data6.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data6.getFlag() ==1) {	
-					if( delay6[data6.getNo()]+AniDly-GreLan <= Time && Time <= delay6[data6.getNo()]+AniDly+GreLan ) {
+					if( delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan <= Time && Time <= delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay6[data6.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay6[data6.getNo()]+AniDly-GreLan)) {
+					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay6[data6.getNo()]+AniDly+GreLan) < Time && Time <= (delay6[data6.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan) < Time && Time <= (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay6[data6.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay6[data6.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan-BadLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay6[data6.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay6[data6.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data6.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 			
 				break;
 		
 			case R.id.TapButton7:
 				kick.play(sound_id7, 0.5F, 1.0F, 0, 0, 1.0F);
-
+				scheduleSetLagSum =0;
 				if(data7.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data7.getFlag() ==1) {	
-					if( delay7[data7.getNo()]+AniDly-GreLan <= Time && Time <= delay7[data7.getNo()]+AniDly+GreLan ) {
+					if( delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan <= Time && Time <= delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay7[data7.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay7[data7.getNo()]+AniDly-GreLan)) {
+					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay7[data7.getNo()]+AniDly+GreLan) < Time && Time <= (delay7[data7.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan) < Time && Time <= (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay7[data7.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay7[data7.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan-BadLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay7[data7.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay7[data7.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan+BadLan))  {
 						TextView textView7 = (TextView) findViewById(R.id.valueView);
 						textView7.setText("Bad.");
 						break;		
 					}	
 						data7.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 			
 				break;
 			case R.id.TapButton8:
 				tom123.play(sound_id8, 0.5F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data8.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data8.getFlag() ==1) {	
-					if( delay8[data8.getNo()]+AniDly-GreLan <= Time && Time <= delay8[data8.getNo()]+AniDly+GreLan ) {
+					if( delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan <= Time && Time <= delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay8[data8.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay8[data8.getNo()]+AniDly-GreLan)) {
+					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay8[data8.getNo()]+AniDly+GreLan) < Time && Time <= (delay8[data8.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan) < Time && Time <= (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay8[data8.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay8[data8.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan-BadLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay8[data8.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay8[data8.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data8.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton10:
 				snare1.play(sound_id10, 1.0F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data10.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data10.getFlag() ==1) {	
-					if( delay10[data10.getNo()]+AniDly-GreLan <= Time && Time <= delay10[data10.getNo()]+AniDly+GreLan ) {
+					if( delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan <= Time && Time <= delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay10[data10.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay10[data10.getNo()]+AniDly-GreLan)) {
+					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay10[data10.getNo()]+AniDly+GreLan) < Time && Time <= (delay10[data10.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan) < Time && Time <= (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay10[data10.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay10[data10.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan-BadLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay10[data10.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay10[data10.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data10.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton11:
 				snare2.play(sound_id11, 1.0F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data11.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data11.getFlag() ==1) {	
-					if( delay11[data11.getNo()]+AniDly-GreLan <= Time && Time <= delay11[data11.getNo()]+AniDly+GreLan ) {
+					if( delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan <= Time && Time <= delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay11[data11.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay11[data11.getNo()]+AniDly-GreLan)) {
+					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay11[data11.getNo()]+AniDly+GreLan) < Time && Time <= (delay11[data11.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan) < Time && Time <= (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay11[data11.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay11[data11.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan-BadLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay11[data11.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay11[data11.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data11.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton12:
 				crash.play(sound_id12, 1.0F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data12.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data12.getFlag() ==1) {	
-					if( delay12[data12.getNo()]+AniDly-GreLan <= Time && Time <= delay12[data12.getNo()]+AniDly+GreLan ) {
+					if( delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan <= Time && Time <= delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay12[data12.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay12[data12.getNo()]+AniDly-GreLan)) {
+					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay12[data12.getNo()]+AniDly+GreLan) < Time && Time <= (delay12[data12.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan) < Time && Time <= (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay12[data12.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay12[data12.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan-BadLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay12[data12.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay12[data12.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data12.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;			
 			case R.id.TapButton16:
 				clap.play(sound_id16, 1.0F, 1.0F, 0, 0, 1.0F);
+				scheduleSetLagSum =0;
 				if(data16.getFlag() ==0) {
 					TextView textView1 = (TextView) findViewById(R.id.valueView);
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data16.getFlag() ==1) {	
-					if( delay16[data16.getNo()]+AniDly-GreLan <= Time && Time <= delay16[data16.getNo()]+AniDly+GreLan ) {
+					if( delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan <= Time && Time <= delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						score +=70;
 						break;
-					} else if ((delay16[data16.getNo()]+AniDly-GreLan-GodLan) <= Time && Time < (delay16[data16.getNo()]+AniDly-GreLan)) {
+					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						score +=30;
 						break;
-					} else if ((delay16[data16.getNo()]+AniDly+GreLan) < Time && Time <= (delay16[data16.getNo()]+AniDly+GreLan+GodLan)) {
+					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan) < Time && Time <= (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						score +=20;
 						break;
-					} else if ((delay16[data16.getNo()]+AniDly-GreLan-GodLan-BadLan) <= Time && Time < (delay16[data16.getNo()]+AniDly-GreLan-GodLan))  {
+					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan-BadLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						break;
-					} else if ((delay16[data16.getNo()]+AniDly+GreLan+GodLan) <= Time && Time < (delay16[data16.getNo()]+AniDly+GreLan+GodLan+BadLan))  {
+					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						break;		
 					}	
 						data16.init();	
+						scheduleSetLagSum =+ scheduleSetLag;
 				}
 				break;
 			}
