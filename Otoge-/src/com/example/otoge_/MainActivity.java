@@ -1,6 +1,5 @@
 package com.example.otoge_;
 
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.media.AudioManager;
@@ -28,11 +27,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Button ride_button, bd_button, snare1_button, snare2_button, clap_button, tom123_button,
 		kick_button, crash_button;
 		
+		Button start_button, stay_button, return_button;		
+		
+		Button music1_button, music2_button,music3_button;
+		
 		int sound_id1, sound_id2, sound_id3, sound_id4, sound_id5, sound_id6,
 		sound_id7, sound_id8, sound_id9, sound_id10, sound_id11, sound_id12,
 		sound_id13, sound_id14, sound_id15, sound_id16;
 	       
-		Button	start_button, stay_button, return_button;		
 		
 		ImageView tap_button1,tap_button2,tap_button3,tap_button4,tap_button5,
 		tap_button6,tap_button7,tap_button8,tap_button9,tap_button10,tap_button11,
@@ -91,7 +93,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		long scheduleSetLagSum=0;
 	
 		Timer timer;
-		Date date = new Date(StartTimeMillis+InterBGM);
 		BGMTask timerTask0;
 		Handler handler;
 			
@@ -155,6 +156,10 @@ public class MainActivity extends Activity implements OnTouchListener {
         stay_button = (Button) findViewById(R.id.StayButton1);
         return_button = (Button) findViewById(R.id.ReturnButton1);
         start_button = (Button)findViewById(R.id.StartButton1);
+        
+        music1_button = (Button) findViewById(R.id.musicbutton1);
+        music2_button = (Button) findViewById(R.id.musicbutton2);
+        music3_button = (Button)findViewById(R.id.musicbutton3);
       
         tap_button1 = (ImageView) findViewById(R.id.TapImage1);
         tap_button2 = (ImageView) findViewById(R.id.TapImage2);
@@ -188,6 +193,15 @@ public class MainActivity extends Activity implements OnTouchListener {
         stay_button.setVisibility(View.INVISIBLE);
         return_button.setVisibility(View.INVISIBLE);
         
+        music1_button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MainActivity.this, Music2Activity.class);
+				// 次画面のアクティビティ起動
+				startActivity(intent);
+			}
+		});
+        
 		// タイマー開始ボタンの処理
 		start_button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -198,16 +212,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        return_button.setVisibility(View.VISIBLE);
 		        start_button.setVisibility(View.INVISIBLE);
 				
-				/*現在時刻を取得*/
-				StartTimeMillis = System.currentTimeMillis();
-				Log.d("test1", "aaa");
-				
 				// タイマー1をセット
 				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result);
 				timer =new Timer();
-				timer.schedule(timerTask0,date);
+				timer.schedule(timerTask0,InterBGM);
 				Log.d("bgm", "timerset");
 				
+				/*現在時刻を取得*/
+				StartTimeMillis = System.currentTimeMillis();
+				Log.d("test1", "aaa");
 				
 				//ボタン2のアニメーションタイマー・タスクのセット
 				for(int i=0; i < delay2.length; i++) {
@@ -228,6 +241,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag6 = ButtonTimeMillis- StartTimeMillis;
+				Log.d("bgm", String.valueOf(AniTimeLag6));
 				
 				//ボタン6のアニメーションタイマー・タスクのセット
 				for(int i=0; i < delay6.length; i++) {	
@@ -248,6 +262,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag7 = ButtonTimeMillis- StartTimeMillis;
+				Log.d("bgm", String.valueOf(AniTimeLag7));
 				
 				//ボタン7のアニメーションタイマー・タスクのセット
 				for(int i=0; i < delay7.length; i++) {	

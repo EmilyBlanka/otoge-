@@ -50,7 +50,7 @@ public class BGMTask extends TimerTask {
 				        intent.putExtra("maxcomboNo",result.maxComboNo());
 				        intent.putExtra("maxScore",result.scoreMax());
 				        intent.putExtra("returnscoreAve",(int)result.scoreAve());
-						
+				        activity.startActivity(intent);
 					}
 				});
 				
