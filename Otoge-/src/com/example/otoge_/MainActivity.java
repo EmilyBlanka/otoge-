@@ -89,31 +89,34 @@ public class MainActivity extends Activity implements OnTouchListener {
 		private long InterBGM=1000;
 		long scheduleSetLag =1;
 		long scheduleSetLagSum=0;
-		int score=0;
 	
 		Timer timer;
 		Date date = new Date(StartTimeMillis+InterBGM);
 		BGMTask timerTask0;
 		Handler handler;
 			
-		Data data1 =new Data(-1);
-		Data data2 =new Data(-1);
-		Data data3 =new Data(-1);
-		Data data4 =new Data(-1);
-		Data data5 =new Data(-1);
-		Data data6 =new Data(-1);
-		Data data7 =new Data(-1);
-		Data data8 =new Data(-1);
-		Data data9 =new Data(-1);
-		Data data10 =new Data(-1);
-		Data data11 =new Data(-1);
-		Data data12 =new Data(-1);
-		Data data13 =new Data(-1);
-		Data data14 =new Data(-1);
-		Data data15 =new Data(-1);
-		Data data16 =new Data(-1);
+		ScoreJudgeData data1 =new ScoreJudgeData(-1);
+		ScoreJudgeData data2 =new ScoreJudgeData(-1);
+		ScoreJudgeData data3 =new ScoreJudgeData(-1);
+		ScoreJudgeData data4 =new ScoreJudgeData(-1);
+		ScoreJudgeData data5 =new ScoreJudgeData(-1);
+		ScoreJudgeData data6 =new ScoreJudgeData(-1);
+		ScoreJudgeData data7 =new ScoreJudgeData(-1);
+		ScoreJudgeData data8 =new ScoreJudgeData(-1);
+		ScoreJudgeData data9 =new ScoreJudgeData(-1);
+		ScoreJudgeData data10 =new ScoreJudgeData(-1);
+		ScoreJudgeData data11 =new ScoreJudgeData(-1);
+		ScoreJudgeData data12 =new ScoreJudgeData(-1);
+		ScoreJudgeData data13 =new ScoreJudgeData(-1);
+		ScoreJudgeData data14 =new ScoreJudgeData(-1);
+		ScoreJudgeData data15 =new ScoreJudgeData(-1);
+		ScoreJudgeData data16 =new ScoreJudgeData(-1);
 		
+		int MaxComboNo = (delay2.length)+(delay6.length)+(delay7.length)+(delay8.length)+(delay10.length)+(delay11.length)
+				+(delay12.length)+(delay16.length);
+		/*int maxScore = MaxComboNo*70;*/
 		
+		ResultData result =new ResultData(MaxComboNo);
 		
 		
     @Override
@@ -185,7 +188,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         stay_button.setVisibility(View.INVISIBLE);
         return_button.setVisibility(View.INVISIBLE);
         
-        // タイマー開始ボタンの処理
+		// タイマー開始ボタンの処理
 		start_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -200,7 +203,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				Log.d("test1", "aaa");
 				
 				// タイマー1をセット
-				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this);
+				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result);
 				timer =new Timer();
 				timer.schedule(timerTask0,date);
 				Log.d("bgm", "timerset");
@@ -375,12 +378,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        stay_button.setVisibility(View.INVISIBLE);
 		        return_button.setVisibility(View.INVISIBLE);
 		        start_button.setVisibility(View.VISIBLE);
-		        
+		       
+		        Intent intent=new Intent(getApplicationContext(),ResultActivity.class);
+		        intent.putExtra("returnscore",result.score);
+		        intent.putExtra("returnmaxcombo",result.MaxCombo);
+		        intent.putExtra("returngreatNo",result.greatNo);
+		        intent.putExtra("returngoodNo",result.goodNo);
+		        intent.putExtra("returnbadNo",result.badNo);
+		        intent.putExtra("maxcomboNo",result.maxComboNo());
+		        intent.putExtra("maxScore",result.scoreMax());
+		        intent.putExtra("returnscoreAve",(int)result.scoreAve());
+				startActivity(intent);
+				
 		        timerTask0.stopBGM();
-		        timer.cancel(); 
-		        
-		        /*Intent intent=new Intent(MainActivity.this,ResultActivity.class);
-				startActivity(intent);*/
+		        timer.cancel();      
 		    }
 		});
     }
@@ -393,13 +404,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		int GodLan =70;
 		int BadLan =45;
 		
-		String stringscore = String.valueOf(score);
-		TextView textView0 = (TextView) findViewById(R.id.textView1);
-		textView0.setText(stringscore);
-		
 		TouchTimeMillis = System.currentTimeMillis();
 		Time =TouchTimeMillis-StartTimeMillis;
-		 
+		
 		if((event.getAction() == MotionEvent.ACTION_DOWN) || (event.getAction() == MotionEvent.ACTION_POINTER_DOWN)) {
 			switch (v.getId()) {
 			case R.id.TapButton2:
@@ -413,25 +420,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan <= Time && Time <= delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan) < Time && Time <= (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan-BadLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data2.init();	
@@ -450,25 +467,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan <= Time && Time <= delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan) < Time && Time <= (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan-BadLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data6.init();	
@@ -488,25 +515,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan <= Time && Time <= delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan) < Time && Time <= (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan-BadLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan+BadLan))  {
 						TextView textView7 = (TextView) findViewById(R.id.valueView);
 						textView7.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data7.init();	
@@ -525,25 +562,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan <= Time && Time <= delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan) < Time && Time <= (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan-BadLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data8.init();	
@@ -561,25 +608,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan <= Time && Time <= delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan) < Time && Time <= (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan-BadLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data10.init();	
@@ -597,25 +654,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan <= Time && Time <= delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan) < Time && Time <= (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan-BadLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data11.init();	
@@ -633,25 +700,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan <= Time && Time <= delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan) < Time && Time <= (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan-BadLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data12.init();	
@@ -669,25 +746,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 					if( delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan <= Time && Time <= delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
-						score +=70;
+						result.greatPointUp();
+						result.greatNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
-						score +=30;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan) < Time && Time <= (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
-						score +=20;
+						result.goodPointUp();
+						result.goodNoUp();
+						result.comboNoUp();
 						break;
 					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan-BadLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;
 					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
+						result.badNoUp();
+						result.comboNoRes();
 						break;		
 					}	
 						data16.init();	
@@ -695,6 +782,26 @@ public class MainActivity extends Activity implements OnTouchListener {
 				}
 				break;
 			}
+				
+			//maxのcombo数を更新していく
+			if(result.MaxCombo <= result.comboNo){
+				if(result.comboNo != 0){
+					result.MaxCombo =result.comboNo;
+				}	
+			}
+			
+			//scoreをテキストビューに表示
+			String stringscore = String.valueOf(result.score());
+			TextView textView0 = (TextView) findViewById(R.id.textView1);
+			textView0.setText(stringscore);
+			
+			//プレイ中のcombo数をテキストに表示
+			String stringcombo = String.valueOf(result.comboNo());
+			TextView textView00 = (TextView) findViewById(R.id.textView2);
+			textView00.setText(stringcombo);
+			 
+			
+			
 			return true;
 		}else if((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_POINTER_UP)) {
 			switch (v.getId()) {

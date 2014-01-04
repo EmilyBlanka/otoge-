@@ -10,9 +10,9 @@ public class DataFlagTask extends TimerTask {
 	
 	private Handler handler;
 	private Context context;
-	private Data data;
+	private ScoreJudgeData data;
 		
-	public DataFlagTask(MainActivity activity,Handler handler,Data data) {
+	public DataFlagTask(MainActivity activity,Handler handler,ScoreJudgeData data) {
 		this.context=context;
 		this.handler = handler;
 		this.data = data;

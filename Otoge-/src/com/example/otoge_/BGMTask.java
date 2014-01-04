@@ -18,10 +18,12 @@ public class BGMTask extends TimerTask {
 	private long BGMTimeMillis;
 	private Activity activity;
 	private MediaPlayer mediaPlayer;
+	private ResultData result;
 	
-	public BGMTask(Context context,Activity activity) {
+	public BGMTask(Context context,Activity activity ,ResultData result) {
 		this.context=context;
 		this.activity=activity;
+		this.result =result;
 		handler = new Handler();
 		this.mediaPlayer=mediaPlayer;
 		mediaPlayer =MediaPlayer.create(context, R.raw.bgm1);
@@ -39,9 +41,15 @@ public class BGMTask extends TimerTask {
 					@Override
 					public void onCompletion(MediaPlayer mp) {
 						// TODO 自動生成されたメソッド・スタブ
-						Intent intent=new Intent(context,ResultActivity.class);
-						activity.startActivity(intent);
-						
+						Intent intent=new Intent(activity.getApplicationContext(),ResultActivity.class);
+						intent.putExtra("returnscore",result.score);
+				        intent.putExtra("returnmaxcombo",result.MaxCombo);
+				        intent.putExtra("returngreatNo",result.greatNo);
+				        intent.putExtra("returngoodNo",result.goodNo);
+				        intent.putExtra("returnbadNo",result.badNo);
+				        intent.putExtra("maxcomboNo",result.maxComboNo());
+				        intent.putExtra("maxScore",result.scoreMax());
+				        intent.putExtra("returnscoreAve",(int)result.scoreAve());
 						
 					}
 				});

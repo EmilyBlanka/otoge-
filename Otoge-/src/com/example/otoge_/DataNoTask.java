@@ -10,9 +10,9 @@ public class DataNoTask extends TimerTask {
 	
 	private Handler handler;
 	private Context context;
-	private Data data;
+	private ScoreJudgeData data;
 		
-	public DataNoTask(MainActivity activity,Handler handler,Data data) {
+	public DataNoTask(MainActivity activity,Handler handler,ScoreJudgeData data) {
 		this.context=context;
 		this.handler = handler;
 		this.data = data;
