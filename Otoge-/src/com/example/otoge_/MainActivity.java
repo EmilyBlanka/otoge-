@@ -3,7 +3,6 @@ package com.example.otoge_;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,7 +17,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.ImageButton;
 
 public class MainActivity extends Activity implements OnTouchListener {
 	
@@ -193,7 +191,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         stay_button.setVisibility(View.INVISIBLE);
         return_button.setVisibility(View.INVISIBLE);
         
-        music1_button.setOnClickListener(new View.OnClickListener() {
+        music2_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(MainActivity.this, Music2Activity.class);
@@ -209,7 +207,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				//一次停止とリターンボタンを表示、スタートボタンを非表示
 		        stay_button.setVisibility(View.INVISIBLE);
-		        return_button.setVisibility(View.VISIBLE);
+		        return_button.setVisibility(View.VISIBLE);                                                     
 		        start_button.setVisibility(View.INVISIBLE);
 				
 				// タイマー1をセット
@@ -230,18 +228,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 					  					
 					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data2);
 					timer.schedule(timerTask2, delay2[i] + InterBGM-scheduleSetLagSum + AniDly-(AniDly/2));
-
+					Log.d("no", "2");
+					
 					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data2);
 					timer.schedule(timerTask3, delay2[i] + InterBGM-scheduleSetLagSum +AniDly+(AniDly/2));
+					Log.d("flag", "2");
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}	
 				
 				scheduleSetLagSum =0;
 				
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag6 = ButtonTimeMillis- StartTimeMillis;
-				Log.d("bgm", String.valueOf(AniTimeLag6));
+				
 				
 				//ボタン6のアニメーションタイマー・タスクのセット
 				for(int i=0; i < delay6.length; i++) {	
@@ -249,20 +249,20 @@ public class MainActivity extends Activity implements OnTouchListener {
 					timer.schedule(timertask4, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
 					Log.d("ani", "6");
 					
-					TimerTask timerTask5 = new DataNoTask(MainActivity.this,handler,data6);
+					TimerTask timerTask5 = new DataNoTask(MainActivity.this,handler,data6);12
 					timer.schedule(timerTask5, delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly-(AniDly/2));
 
 					TimerTask timerTask6 = new DataFlagTask(MainActivity.this,handler,data6);
 					timer.schedule(timerTask6, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly+(AniDly/2));	
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}		
 				
 				scheduleSetLagSum =0;
 				
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag7 = ButtonTimeMillis- StartTimeMillis;
-				Log.d("bgm", String.valueOf(AniTimeLag7));
+				
 				
 				//ボタン7のアニメーションタイマー・タスクのセット
 				for(int i=0; i < delay7.length; i++) {	
@@ -275,7 +275,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask9 = new DataFlagTask(MainActivity.this,handler,data7);
 					timer.schedule(timerTask9, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}	
 				
 				scheduleSetLagSum =0;
@@ -294,7 +294,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask12 = new DataFlagTask(MainActivity.this,handler,data8);
 					timer.schedule(timerTask12, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}
 				
 				scheduleSetLagSum =0;
@@ -313,7 +313,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask15 = new DataFlagTask(MainActivity.this,handler,data10);
 					timer.schedule(timerTask15, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}
 				
 				scheduleSetLagSum =0;
@@ -332,7 +332,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask18 = new DataFlagTask(MainActivity.this,handler,data11);
 					timer.schedule(timerTask18, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly+(AniDly/2));		
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}
 				
 				scheduleSetLagSum =0;
@@ -350,7 +350,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask21 = new DataFlagTask(MainActivity.this,handler,data12);
 					timer.schedule(timerTask21, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly+(AniDly/2));		
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}
 				
 				scheduleSetLagSum =0;
@@ -368,7 +368,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data16);
 					timer.schedule(timerTask24, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
-					scheduleSetLagSum =+ scheduleSetLag;
+					scheduleSetLagSum +=scheduleSetLag;
 				}		
 				scheduleSetLagSum =0;
 			}
@@ -467,7 +467,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data2.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;
 				
@@ -514,7 +514,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data6.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 			
 				break;
@@ -562,7 +562,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data7.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 			
 				break;
@@ -609,7 +609,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data8.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton10:
@@ -655,7 +655,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data10.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton11:
@@ -701,7 +701,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data11.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;
 			case R.id.TapButton12:
@@ -747,7 +747,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data12.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;			
 			case R.id.TapButton16:
@@ -793,7 +793,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						break;		
 					}	
 						data16.init();	
-						scheduleSetLagSum =+ scheduleSetLag;
+						scheduleSetLagSum +=scheduleSetLag;
 				}
 				break;
 			}
