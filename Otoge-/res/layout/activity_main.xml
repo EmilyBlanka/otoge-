@@ -80,7 +80,7 @@
                             android:id="@+id/imageView1"
                             android:layout_width="78dp"
                             android:layout_height="78dp"
-                            android:src="@drawable/anim_button_red" />     
+                            android:src="@drawable/anim_button_red" /> 
                         <Button
                             android:id="@+id/TapButton1"
                             android:layout_width="78dp"
