@@ -1,5 +1,6 @@
 	package com.example.otoge_;
 
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.media.AudioManager;
@@ -44,39 +45,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		private long justnow =0;  // 繰り返しの間隔（単位：msec）
 		int AniDly = 400; //ボタンのアニメーションが開始から終了までの間隔（単位：msec）
 		
-		private long[] delay1={};
-		//ride(10509)
-		private long[] delay2={10509,11191,11873,12595,13236,13691,57782,58464,59600,60282,61418,62100,63236,63918,65054,
-		65736,66873,67554,68691,69373,70509,71191,72327,73009,74145,74827,75964,76645,77782,78464,79145};
-		/*private long[] delay2={500,1000,1500,2000,2500,3000};*/
-		private long[] delay3={};
-		private long[] delay4={};
-		private long[] delay5={};
-		//bd(2727)
-		/*private long[] delay6={700,1200,1700,2200,2700,3200};*/
-		private long[] delay6={2327,5964,9600,(10509/*+60*/),(11191/*+60*/),(11873/*+60*/),(12595/*+70*/),(13236/*+70*/),13691,14145,15964,16418,17782,18009,18464,19145,19373,19827,21418,
-		23236,23691,25055,25282,25736,26418,26645,27100,35055,35282,42327,42782,43236,45055,45736,46873,48691,50509,52327,53009,
-		54145,55964,56645,65054,65736,66873,67554,68691,69373,70509,71191};
-		//kick
-		private long[] delay7={44373,46191,48009,49827,51645,53464,55282,57100,57441};
-		//toms(2955)
-		private long[] delay8={2555,6191,9827,64600};
-		private long[] delay9={};
-		//SN
-		private long[] delay10={15055,16873,18691,20055,22327,24145,25964,27327,27782,28236,35509,35736,42555,
-		43009,44600,46418,48236,50054,51873,53691,55509,57327,57554};
-		//SN2
-		private long[] delay11={15055,16873,18691,20055,22327,24145,25964,27327,27782,28236,35509,35736,42555,
-				43009,44600,46418,48236,50054,51873,53691,55509,57327,57554};
-		//clash
-		private long[] delay12={20509,28691,35964,43236,50509};
-		private long[] delay13={};
-		private long[] delay14={};
-		private long[] delay15={};
-		//clap
-		private long[] delay16={28691,29145,29600,30055,30509,30964,31418,31873,32327,32782,33236,33691,34145,34600,35964,
-		36418,36873,37327,37782,38236,38691,39145,39600,40055,40509,40964,41418,41873};
-		
 		private long ButtonTimeMillis;
 		private long AniTimeLag6;
 		private long AniTimeLag7;
@@ -95,7 +63,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Timer timer;
 		BGMTask timerTask0;
 		Handler handler;
-			
+		
+		TimingData timing =new TimingData(1);
 		ScoreJudgeData data1 =new ScoreJudgeData(-1);
 		ScoreJudgeData data2 =new ScoreJudgeData(-1);
 		ScoreJudgeData data3 =new ScoreJudgeData(-1);
@@ -113,11 +82,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 		ScoreJudgeData data15 =new ScoreJudgeData(-1);
 		ScoreJudgeData data16 =new ScoreJudgeData(-1);
 		
-		int MaxComboNo = (delay2.length)+(delay6.length)+(delay7.length)+(delay8.length)+(delay10.length)+(delay11.length)
-				+(delay12.length)+(delay16.length);
+		int MaxComboNo = (timing.delay2.length)+(timing.delay6.length)+(timing.delay7.length)+(timing.delay8.length)+
+			(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);
 		/*int maxScore = MaxComboNo*70;*/
+		int musicNo =1;
 		
 		ResultData result =new ResultData(MaxComboNo);
+		
 		
 		
     @Override
@@ -199,6 +170,8 @@ public class MainActivity extends Activity implements OnTouchListener {
         
         handler = new Handler();
         
+        Log.d("bbbbb", Arrays.toString(timing.delay1));
+        
         //一次停止とリターンボタンを最初非表示
         stay_button.setVisibility(View.INVISIBLE);
         return_button.setVisibility(View.INVISIBLE);
@@ -206,9 +179,12 @@ public class MainActivity extends Activity implements OnTouchListener {
         music2_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this, Music2Activity.class);
+				/*Intent intent = new Intent(MainActivity.this, Music2Activity.class);
 				// 次画面のアクティビティ起動
-				startActivity(intent);
+				startActivity(intent);*/
+				
+				timing.setmusic2();
+				Log.d("bbbbb", Arrays.toString(timing.delay1));
 			}
 		});
         
@@ -233,17 +209,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 				Log.d("test1", "aaa");
 				
 				//ボタン2のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay2.length; i++) {
+				for(int i=0; i < timing.delay2.length; i++) {
 					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button2);
-					timer.schedule(timertask1, delay2[i]+InterBGM-scheduleSetLagSum); 
+					timer.schedule(timertask1, timing.delay2[i]+InterBGM-scheduleSetLagSum); 
 					Log.d("ani", "2");
 					  					
 					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data2);
-					timer.schedule(timerTask2, delay2[i] + InterBGM-scheduleSetLagSum + AniDly-(AniDly/2));
+					timer.schedule(timerTask2, timing.delay2[i] + InterBGM-scheduleSetLagSum + AniDly-(AniDly/2));
 					Log.d("no", "2");
 					
 					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data2);
-					timer.schedule(timerTask3, delay2[i] + InterBGM-scheduleSetLagSum +AniDly+(AniDly/2));
+					timer.schedule(timerTask3, timing.delay2[i] + InterBGM-scheduleSetLagSum +AniDly+(AniDly/2));
 					Log.d("flag", "2");
 					
 					scheduleSetLagSum +=scheduleSetLag;
@@ -256,16 +232,16 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				
 				//ボタン6のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay6.length; i++) {	
+				for(int i=0; i < timing.delay6.length; i++) {	
 					TimerTask timertask4 = new AnimationTask(MainActivity.this,handler,tap_button6);
-					timer.schedule(timertask4, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
+					timer.schedule(timertask4, timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
 					Log.d("ani", "6");
 					
 					TimerTask timerTask5 = new DataNoTask(MainActivity.this,handler,data6);
-					timer.schedule(timerTask5, delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly-(AniDly/2));
+					timer.schedule(timerTask5, timing.delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly-(AniDly/2));
 
 					TimerTask timerTask6 = new DataFlagTask(MainActivity.this,handler,data6);
-					timer.schedule(timerTask6, delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly+(AniDly/2));	
+					timer.schedule(timerTask6, timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + AniDly+(AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -277,15 +253,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				
 				
 				//ボタン7のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay7.length; i++) {	
+				for(int i=0; i < timing.delay7.length; i++) {	
 					TimerTask timertask7 = new AnimationTask(MainActivity.this,handler,tap_button7);
-					timer.schedule(timertask7, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
+					timer.schedule(timertask7, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
 					
 					TimerTask timerTask8 = new DataNoTask(MainActivity.this,handler,data7);
-					timer.schedule(timerTask8, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask8, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask9 = new DataFlagTask(MainActivity.this,handler,data7);
-					timer.schedule(timerTask9, delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly+(AniDly/2));	
+					timer.schedule(timerTask9, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -296,15 +272,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag8 = ButtonTimeMillis- StartTimeMillis;
 				
 				//ボタン8のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay8.length; i++) {	
+				for(int i=0; i < timing.delay8.length; i++) {	
 					TimerTask timertask10 = new AnimationTask(MainActivity.this,handler,tap_button8);
-					timer.schedule(timertask10, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
+					timer.schedule(timertask10, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
 					
 					TimerTask timerTask11 = new DataNoTask(MainActivity.this,handler,data8);
-					timer.schedule(timerTask11, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask11, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask12 = new DataFlagTask(MainActivity.this,handler,data8);
-					timer.schedule(timerTask12, delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly+(AniDly/2));	
+					timer.schedule(timerTask12, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -315,15 +291,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag10 = ButtonTimeMillis- StartTimeMillis;
 				
 				//ボタン10のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay10.length; i++) {	
+				for(int i=0; i < timing.delay10.length; i++) {	
 					TimerTask timertask13= new AnimationTask(MainActivity.this,handler,tap_button10);
-					timer.schedule(timertask13, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
+					timer.schedule(timertask13, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
 					
 					TimerTask timerTask14 = new DataNoTask(MainActivity.this,handler,data10);
-					timer.schedule(timerTask14, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask14, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask15 = new DataFlagTask(MainActivity.this,handler,data10);
-					timer.schedule(timerTask15, delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly+(AniDly/2));	
+					timer.schedule(timerTask15, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -334,15 +310,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag11 = ButtonTimeMillis- StartTimeMillis;
 				
 				//ボタン11のアニメーションタイマー・タスクのセット
-				for(int i=0; i < delay11.length; i++) {	
+				for(int i=0; i < timing.delay11.length; i++) {	
 					TimerTask timertask16= new AnimationTask(MainActivity.this,handler,tap_button11);
-					timer.schedule(timertask16, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
+					timer.schedule(timertask16, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
 					
 					TimerTask timerTask17 = new DataNoTask(MainActivity.this,handler,data11);
-					timer.schedule(timerTask17, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask17, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask18 = new DataFlagTask(MainActivity.this,handler,data11);
-					timer.schedule(timerTask18, delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly+(AniDly/2));		
+					timer.schedule(timerTask18, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+AniDly+(AniDly/2));		
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -352,15 +328,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag12 = ButtonTimeMillis- StartTimeMillis;
 				
-				for(int i=0; i < delay12.length; i++) {	
+				for(int i=0; i < timing.delay12.length; i++) {	
 					TimerTask timertask19= new AnimationTask(MainActivity.this,handler,tap_button12);
-					timer.schedule(timertask19, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
+					timer.schedule(timertask19, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
 					
 					TimerTask timerTask20 = new DataNoTask(MainActivity.this,handler,data12);
-					timer.schedule(timerTask20, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask20, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask21 = new DataFlagTask(MainActivity.this,handler,data12);
-					timer.schedule(timerTask21, delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly+(AniDly/2));		
+					timer.schedule(timerTask21, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+AniDly+(AniDly/2));		
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -370,15 +346,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag16 = ButtonTimeMillis- StartTimeMillis;
 				
-				for(int i=0; i < delay16.length; i++) {	
+				for(int i=0; i < timing.delay16.length; i++) {	
 					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button16);
-					timer.schedule(timertask22, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
+					timer.schedule(timertask22, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
 					
 					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data16);
-					timer.schedule(timerTask23, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly-(AniDly/2));
+					timer.schedule(timerTask23, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly-(AniDly/2));
 
 					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data16);
-					timer.schedule(timerTask24, delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly+(AniDly/2));	
+					timer.schedule(timerTask24, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+AniDly+(AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -444,7 +420,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} else if(data2.getFlag() ==1) {	
-					if( delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan <= Time && Time <= delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan ) {
+					if( timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan <= Time && Time <= timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						ride_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -452,27 +428,27 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan)) {
+					} else if ((timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan) <= Time && Time < (timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						result.goodPointUp();
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan) < Time && Time <= (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan)) {
+					} else if ((timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan) < Time && Time <= (timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						result.goodPointUp();
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan-BadLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan))  {
+					} else if ((timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan) <= Time && Time < (delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan) <= Time && Time < (timing.delay2[data2.getNo()]+InterBGM+AniDly+scheduleSetLagSum+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						result.badNoUp();
@@ -492,7 +468,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data6.getFlag() ==1) {	
-					if( delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan <= Time && Time <= delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan ) {
+					if( timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan <= Time && Time <= timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						bd_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -500,7 +476,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan)) {
+					} else if ((timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan) <= Time && Time < (timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						bd_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -508,7 +484,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					}  else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan) < Time && Time <= (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan)) {
+					}  else if ((timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan) < Time && Time <= (timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						bd_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -516,14 +492,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan-BadLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan))  {
+					} else if ((timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						bd_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan) <= Time && Time < (delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan) <= Time && Time < (timing.delay6[data6.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag6+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						bd_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -545,7 +521,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data7.getFlag() ==1) {	
-					if( delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan <= Time && Time <= delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan ) {
+					if( timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan <= Time && Time <= timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						kick_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -553,7 +529,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan)) {
+					} else if ((timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan) <= Time && Time < (timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						kick_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -561,7 +537,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan) < Time && Time <= (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan)) {
+					} else if ((timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan) < Time && Time <= (timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						kick_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -569,14 +545,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan-BadLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan))  {
+					} else if ((timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						kick_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan) <= Time && Time < (delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan) <= Time && Time < (timing.delay7[data7.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag7+GreLan+GodLan+BadLan))  {
 						TextView textView7 = (TextView) findViewById(R.id.valueView);
 						textView7.setText("Bad.");
 						kick_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -597,7 +573,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data8.getFlag() ==1) {	
-					if( delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan <= Time && Time <= delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan ) {
+					if( timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan <= Time && Time <= timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						tom123_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -605,7 +581,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan)) {
+					} else if ((timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan) <= Time && Time < (timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						tom123_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -613,7 +589,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan) < Time && Time <= (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan)) {
+					} else if ((timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan) < Time && Time <= (timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						tom123_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -621,14 +597,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan-BadLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan))  {
+					} else if ((timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						tom123_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan) <= Time && Time < (delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan) <= Time && Time < (timing.delay8[data8.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag8+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						tom123_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -648,7 +624,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data10.getFlag() ==1) {	
-					if( delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan <= Time && Time <= delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan ) {
+					if( timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan <= Time && Time <= timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						snare1_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -656,7 +632,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan)) {
+					} else if ((timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan) <= Time && Time < (timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						snare1_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -664,7 +640,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan) < Time && Time <= (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan)) {
+					} else if ((timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan) < Time && Time <= (timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						snare1_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -672,14 +648,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan-BadLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan))  {
+					} else if ((timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						snare1_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan) <= Time && Time < (delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan) <= Time && Time < (timing.delay10[data10.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag10+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						snare1_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -699,7 +675,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data11.getFlag() ==1) {	
-					if( delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan <= Time && Time <= delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan ) {
+					if( timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan <= Time && Time <= timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						snare2_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -707,7 +683,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan)) {
+					} else if ((timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan) <= Time && Time < (timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						snare2_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -715,7 +691,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan) < Time && Time <= (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan)) {
+					} else if ((timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan) < Time && Time <= (timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						snare2_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -723,14 +699,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan-BadLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan))  {
+					} else if ((timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						snare2_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan) <= Time && Time < (delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan) <= Time && Time < (timing.delay11[data11.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag11+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						snare2_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -750,7 +726,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data12.getFlag() ==1) {	
-					if( delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan <= Time && Time <= delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan ) {
+					if( timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan <= Time && Time <= timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						crash_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -758,7 +734,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan)) {
+					} else if ((timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan) <= Time && Time < (timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						crash_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -766,7 +742,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan) < Time && Time <= (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan)) {
+					} else if ((timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan) < Time && Time <= (timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						crash_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -774,14 +750,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan-BadLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan))  {
+					} else if ((timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						crash_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan) <= Time && Time < (delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan) <= Time && Time < (timing.delay12[data12.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag12+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						crash_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
@@ -801,7 +777,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					textView1.setText("ボタン押しても無視");
 					break;	
 				} if(data16.getFlag() ==1) {	
-					if( delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan <= Time && Time <= delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan ) {
+					if( timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan <= Time && Time <= timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan ) {
 						TextView textView2 = (TextView) findViewById(R.id.valueView);
 						textView2.setText("Great!");
 						clap_button.setBackgroundColor(Color.argb(128, 0, 255, 0));
@@ -809,7 +785,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.greatNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan)) {
+					} else if ((timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan) <= Time && Time < (timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan)) {
 						TextView textView3 = (TextView) findViewById(R.id.valueView);
 						textView3.setText("Good!");
 						clap_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -817,7 +793,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan) < Time && Time <= (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan)) {
+					} else if ((timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan) < Time && Time <= (timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan)) {
 						TextView textView4 = (TextView) findViewById(R.id.valueView);
 						textView4.setText("Good!");
 						clap_button.setBackgroundColor(Color.argb(128, 255, 255, 0));
@@ -825,14 +801,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 						result.goodNoUp();
 						result.comboNoUp();
 						break;
-					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan-BadLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan))  {
+					} else if ((timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan-BadLan) <= Time && Time < (timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16-GreLan-GodLan))  {
 						TextView textView5 = (TextView) findViewById(R.id.valueView);
 						textView5.setText("Bad.");
 						clap_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
 						result.badNoUp();
 						result.comboNoRes();
 						break;
-					} else if ((delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan) <= Time && Time < (delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan+BadLan))  {
+					} else if ((timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan) <= Time && Time < (timing.delay16[data16.getNo()]+InterBGM+AniDly+scheduleSetLagSum+AniTimeLag16+GreLan+GodLan+BadLan))  {
 						TextView textView6 = (TextView) findViewById(R.id.valueView);
 						textView6.setText("Bad.");
 						clap_button.setBackgroundColor(Color.argb(128, 255, 0, 0));
