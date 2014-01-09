@@ -8,8 +8,6 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Handler;
 import android.util.Log;
-import android.widget.Toast;
-
 
 public class BGMTask extends TimerTask {
 	
@@ -52,8 +50,7 @@ public class BGMTask extends TimerTask {
 				        intent.putExtra("returnscoreAve",(int)result.scoreAve());
 				        activity.startActivity(intent);
 					}
-				});
-				
+				});	
 			}
 		});
 	}
@@ -65,5 +62,9 @@ public class BGMTask extends TimerTask {
         } 
 	}
 	
-	
+	public void changeBGM1() {
+		mediaPlayer.release();
+        mediaPlayer =MediaPlayer.create(context, R.raw.all_beats1);
+	}
 }
+	
