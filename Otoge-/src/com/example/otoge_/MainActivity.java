@@ -1,9 +1,13 @@
 package com.example.otoge_;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
+import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.app.Activity;
@@ -25,7 +29,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		SoundPool sound1, sound2, sound3, sound4, sound5, sound7, sound6, sound8, 
 		sound9, sound10, sound11,sound12, sound13,sound14, sound15, sound16;
 		
-		private int[] soundResouces = {
+		MediaPlayer mediaplayer, mediaplayer1, mediaplayer2, mediaplayer3 ;
+		
+		private int[] soundResouces1 = {
                 R.raw.nosound,
                 R.raw.ride_01,
                 R.raw.bd01,
@@ -35,6 +41,18 @@ public class MainActivity extends Activity implements OnTouchListener {
                 R.raw.snare_02,
                 R.raw.crash_01	,
                 R.raw.hanb_clap_01,
+        };
+		
+		private int[] soundResouces2 = {
+                R.raw.fuck,   R.raw.perc01, R.raw.perc02, R.raw.perc03,
+                R.raw.perc04, R.raw.bd02,  R.raw.sn01,   R.raw.sn02	,
+                R.raw.chip01_, R.raw.clap, R.raw.bongo, R.raw.chip_02,
+                R.raw.perc05, R.raw.hh_01, R.raw.sn03, R.raw.fuck_02,
+        };
+		
+		private int[] MusicResouces = {
+                R.raw.bgm1,
+                R.raw.all_beats1,R.raw.fuck_up_backbgm
         };
 
         private int[] soundIds;
@@ -94,6 +112,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_main);
 		
+		//今起動しているコンテキストを代入しようね。起動していないところの場所で使いたい。
+		/*context=this;*/
+		
 		/*soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);*/
 		sound1 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 		sound2 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
@@ -113,22 +134,22 @@ public class MainActivity extends Activity implements OnTouchListener {
         sound16 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
         
 		soundIds = new int[16];
-		soundIds[0] = sound1.load(this, soundResouces[0], 1 );
-		soundIds[1] = sound2.load(this, soundResouces[1], 1 );
-		soundIds[2] = sound3.load(this, soundResouces[0], 1 );
-		soundIds[3] = sound4.load(this, soundResouces[0], 1 );
-		soundIds[4] = sound5.load(this, soundResouces[0], 1 );
-		soundIds[5] = sound6.load(this, soundResouces[2], 1 );
-		soundIds[6] = sound7.load(this, soundResouces[3], 1 );
-		soundIds[7] = sound8.load(this, soundResouces[4], 1 );
-		soundIds[8] = sound9.load(this, soundResouces[0], 1 );
-		soundIds[9] = sound10.load(this, soundResouces[5], 1 );
-		soundIds[10] = sound11.load(this, soundResouces[6], 1 );
-		soundIds[11] = sound12.load(this, soundResouces[7], 1 );
-		soundIds[12] = sound13.load(this, soundResouces[0], 1 );
-		soundIds[13] = sound14.load(this, soundResouces[0], 1 );
-		soundIds[14] = sound15.load(this, soundResouces[0], 1 );
-		soundIds[15] = sound16.load(this, soundResouces[8], 1 );	
+		soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
+		soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
+		soundIds[2] = sound3.load(this, soundResouces1[0], 1 );
+		soundIds[3] = sound4.load(this, soundResouces1[0], 1 );
+		soundIds[4] = sound5.load(this, soundResouces1[0], 1 );
+		soundIds[5] = sound6.load(this, soundResouces1[2], 1 );
+		soundIds[6] = sound7.load(this, soundResouces1[3], 1 );
+		soundIds[7] = sound8.load(this, soundResouces1[4], 1 );
+		soundIds[8] = sound9.load(this, soundResouces1[0], 1 );
+		soundIds[9] = sound10.load(this, soundResouces1[5], 1 );
+		soundIds[10] = sound11.load(this, soundResouces1[6], 1 );
+		soundIds[11] = sound12.load(this, soundResouces1[7], 1 );
+		soundIds[12] = sound13.load(this, soundResouces1[0], 1 );
+		soundIds[13] = sound14.load(this, soundResouces1[0], 1 );
+		soundIds[14] = sound15.load(this, soundResouces1[0], 1 );
+		soundIds[15] = sound16.load(this, soundResouces1[8], 1 );	
         
         button_2 = (Button) findViewById(R.id.TapButton2); button_2.setBackgroundResource(android.R.drawable.btn_default);
         button_6 = (Button) findViewById(R.id.TapButton6); button_6.setBackgroundResource(android.R.drawable.btn_default);
@@ -190,6 +211,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         button_16.setOnTouchListener(this);
                 
         handler = new Handler();
+        mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[0]);
         
        //一次停止とリターンボタンを最初非表示
         stay_button.setVisibility(View.INVISIBLE);
@@ -203,7 +225,61 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
         
-        
+        music2_button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[1]);
+				mediaplayer.start();
+				
+				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mediaplayer.release();
+						mediaplayer = null;
+						mediaplayer = new MediaPlayer();
+						
+						try {
+							String test = "android.resource://"+getBaseContext().getPackageName()+"/"+R.raw.fuck_up_backbgm;
+							mediaplayer.setDataSource(getBaseContext(), Uri.parse(test));
+							mediaplayer.prepare();
+						} catch (IllegalArgumentException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (SecurityException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}	
+					}
+				});	
+			
+				soundIds[0] = sound1.load(getBaseContext(), soundResouces2[0], 1 );
+				soundIds[1] = sound2.load(getBaseContext(), soundResouces2[1], 1 );
+				soundIds[2] = sound3.load(getBaseContext(), soundResouces2[2], 1 );
+				soundIds[3] = sound4.load(getBaseContext(), soundResouces2[3], 1 );
+				soundIds[4] = sound5.load(getBaseContext(), soundResouces2[4], 1 );
+				soundIds[5] = sound6.load(getBaseContext(), soundResouces2[5], 1 );
+				soundIds[6] = sound7.load(getBaseContext(), soundResouces2[6], 1 );
+				soundIds[7] = sound8.load(getBaseContext(), soundResouces2[7], 1 );
+				soundIds[8] = sound9.load(getBaseContext(), soundResouces2[8], 1 );
+				soundIds[9] = sound10.load(getBaseContext(), soundResouces2[9], 1 );
+				soundIds[10] = sound11.load(getBaseContext(), soundResouces2[10], 1 );
+				soundIds[11] = sound12.load(getBaseContext(), soundResouces2[11], 1 );
+				soundIds[12] = sound13.load(getBaseContext(), soundResouces2[12], 1 );
+				soundIds[13] = sound14.load(getBaseContext(), soundResouces2[13], 1 );
+				soundIds[14] = sound15.load(getBaseContext(), soundResouces2[14], 1 );
+				soundIds[15] = sound16.load(getBaseContext(), soundResouces2[15], 1 );	
+				
+				timing.setmusic2();
+			}
+		});
+    
         
         music3_button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -224,7 +300,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        start_button.setVisibility(View.INVISIBLE);
 				
 				// タイマー1をセット
-				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result);
+		        
+				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
 				timer =new Timer();
 				timer.schedule(timerTask0,InterBGM);
 				
@@ -509,29 +586,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
 		
-		music2_button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-				/*
-				//idをクリア
-				sound1.release();sound2.release();sound3.release();sound4.release();sound5.release();sound6.release();
-				sound7.release();sound8.release();sound9.release();sound10.release();sound11.release();sound12.release();
-				sound13.release();sound14.release();sound15.release();sound16.release();
-				//newで生成
-				sound2 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );*/
-				
-				soundIds[1] = sound2.load(getBaseContext(),soundResouces[8],1);
-				
-				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result);
-				timerTask0.changeBGM1();
-				
-				timing.setmusic2();
-				
-				
-			}
-		});
-    
+		
     
 	    stay_button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -1339,9 +1394,25 @@ public class MainActivity extends Activity implements OnTouchListener {
 			return true;
 		}else if((event.getAction() == MotionEvent.ACTION_UP) || (event.getAction() == MotionEvent.ACTION_POINTER_UP)) {
 			switch (v.getId()) {
+			case R.id.TapButton1:
+				button_1.setBackgroundResource(android.R.drawable.btn_default);
+				sound1.stop(soundIds[0]);
+				break;
 			case R.id.TapButton2:
 				button_2.setBackgroundResource(android.R.drawable.btn_default);
 				sound2.stop(soundIds[1]);
+				break;
+			case R.id.TapButton3:
+				button_3.setBackgroundResource(android.R.drawable.btn_default);
+				sound3.stop(soundIds[2]);
+				break;
+			case R.id.TapButton4:
+				button_4.setBackgroundResource(android.R.drawable.btn_default);
+				sound4.stop(soundIds[3]);
+				break;
+			case R.id.TapButton5:
+				button_5.setBackgroundResource(android.R.drawable.btn_default);
+				sound5.stop(soundIds[4]);
 				break;
 			case R.id.TapButton6:
 				button_6.setBackgroundResource(android.R.drawable.btn_default);
@@ -1355,6 +1426,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 				button_8.setBackgroundResource(android.R.drawable.btn_default);
 				sound8.stop(soundIds[7]);
 				break;
+			case R.id.TapButton9:
+				button_9.setBackgroundResource(android.R.drawable.btn_default);
+				sound9.stop(soundIds[8]);
+				break;
 			case R.id.TapButton10:
 				button_10.setBackgroundResource(android.R.drawable.btn_default);
 				sound10.stop(soundIds[9]);
@@ -1366,6 +1441,18 @@ public class MainActivity extends Activity implements OnTouchListener {
 			case R.id.TapButton12:
 				button_12.setBackgroundResource(android.R.drawable.btn_default);
 				sound12.stop(soundIds[11]);
+				break;
+			case R.id.TapButton13:
+				button_13.setBackgroundResource(android.R.drawable.btn_default);
+				sound13.stop(soundIds[12]);
+				break;
+			case R.id.TapButton14:
+				button_14.setBackgroundResource(android.R.drawable.btn_default);
+				sound14.stop(soundIds[13]);
+				break;
+			case R.id.TapButton15:
+				button_15.setBackgroundResource(android.R.drawable.btn_default);
+				sound15.stop(soundIds[14]);
 				break;
 			case R.id.TapButton16:
 				button_16.setBackgroundResource(android.R.drawable.btn_default);

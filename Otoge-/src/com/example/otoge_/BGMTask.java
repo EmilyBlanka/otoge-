@@ -13,18 +13,17 @@ public class BGMTask extends TimerTask {
 	
 	private Handler handler;
 	private Context context;
-	private long BGMTimeMillis;
 	private Activity activity;
-	private MediaPlayer mediaPlayer;
+	private MediaPlayer mediaplayer;
 	private ResultData result;
 	
-	public BGMTask(Context context,Activity activity ,ResultData result) {
+	public BGMTask(Context context,Activity activity,ResultData result,MediaPlayer mediaplayer) {
 		this.context=context;
 		this.activity=activity;
 		this.result =result;
 		handler = new Handler();
-		this.mediaPlayer=mediaPlayer;
-		mediaPlayer =MediaPlayer.create(context, R.raw.bgm1);
+		this.mediaplayer=mediaplayer;
+		/*mediaPlayer =MediaPlayer.create(context, R.raw.bgm1);*/
 	}
 	
 	@Override
@@ -32,10 +31,10 @@ public class BGMTask extends TimerTask {
 		handler.post(new Runnable() {
 			@Override
 			public void run() {
-				mediaPlayer.start();
+				mediaplayer.start();
 				Log.d("bgm", "run");
 				
-				mediaPlayer.setOnCompletionListener(new OnCompletionListener() {	
+				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
 					@Override
 					public void onCompletion(MediaPlayer mp) {
 						// TODO 自動生成されたメソッド・スタブ
@@ -56,15 +55,15 @@ public class BGMTask extends TimerTask {
 	}
 	
 	public void stopBGM() {
-		if (mediaPlayer.isPlaying()) {
-        	mediaPlayer.stop();
-        	mediaPlayer.release();
+		if (mediaplayer.isPlaying()) {
+        	mediaplayer.stop();
+        	mediaplayer.release();
         } 
 	}
 	
-	public void changeBGM1() {
+	/*public void changeBGM1() {
 		mediaPlayer.release();
         mediaPlayer =MediaPlayer.create(context, R.raw.all_beats1);
-	}
+	}*/
 }
 	
