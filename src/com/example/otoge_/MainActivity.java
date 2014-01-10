@@ -152,7 +152,6 @@ public class MainActivity extends Activity implements OnTouchListener {
         clap_button = (Button) findViewById(R.id.TapButton16);
         
         stay_button = (Button) findViewById(R.id.StayButton1);
-        return_button = (Button) findViewById(R.id.ReturnButton1);
         start_button = (Button)findViewById(R.id.StartButton1);
         
         music1_button = (Button) findViewById(R.id.musicbutton1);
