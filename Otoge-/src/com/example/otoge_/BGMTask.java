@@ -34,22 +34,6 @@ public class BGMTask extends TimerTask {
 				mediaplayer.start();
 				Log.d("bgm", "run");
 				
-				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
-					@Override
-					public void onCompletion(MediaPlayer mp) {
-						// TODO 自動生成されたメソッド・スタブ
-						Intent intent=new Intent(activity.getApplicationContext(),ResultActivity.class);
-						intent.putExtra("returnscore",result.score);
-				        intent.putExtra("returnmaxcombo",result.MaxCombo);
-				        intent.putExtra("returngreatNo",result.greatNo);
-				        intent.putExtra("returngoodNo",result.goodNo);
-				        intent.putExtra("returnbadNo",result.badNo);
-				        intent.putExtra("maxcomboNo",result.maxComboNo());
-				        intent.putExtra("maxScore",result.scoreMax());
-				        intent.putExtra("returnscoreAve",(int)result.scoreAve());
-				        activity.startActivity(intent);
-					}
-				});	
 			}
 		});
 	}
@@ -59,6 +43,25 @@ public class BGMTask extends TimerTask {
         	mediaplayer.stop();
         	mediaplayer.release();
         } 
+	}
+	
+	public void moveResult() {
+		mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				// TODO 自動生成されたメソッド・スタブ
+				Intent intent=new Intent(activity.getApplicationContext(),ResultActivity.class);
+				intent.putExtra("returnscore",result.score);
+		        intent.putExtra("returnmaxcombo",result.MaxCombo);
+		        intent.putExtra("returngreatNo",result.greatNo);
+		        intent.putExtra("returngoodNo",result.goodNo);
+		        intent.putExtra("returnbadNo",result.badNo);
+		        intent.putExtra("maxcomboNo",result.maxComboNo());
+		        intent.putExtra("maxScore",result.scoreMax());
+		        intent.putExtra("returnscoreAve",(int)result.scoreAve());
+		        activity.startActivity(intent);
+			}
+		});	
 	}
 	
 	/*public void changeBGM1() {

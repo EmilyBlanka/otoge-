@@ -63,12 +63,15 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Button start_button, stay_button, return_button;		
 		
 		Button music1_button, music2_button,music3_button;
-		
-		ImageView tap_button1,tap_button2,tap_button3,tap_button4,tap_button5,
-		tap_button6,tap_button7,tap_button8,tap_button9,tap_button10,tap_button11,
-		tap_button12,tap_button13,tap_button14,tap_button15,tap_button16;
+	
+		ImageView[] tap_button=new ImageView[16];
 		
 		Timer timer;
+		
+		TimerTask[] timertaskAni = new TimerTask[16];
+		TimerTask[] timertaskFla = new TimerTask[16];
+		TimerTask[] timertaskNo = new TimerTask[16];
+		
 		BGMTask timerTask0;
 		Handler handler;
 		
@@ -83,6 +86,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		long scheduleSetLagSum=0;
 	
 		TimingData timing =new TimingData(1);
+		
+		/*ScoreJudgeData[] data =new ScoreJudgeData[];*/
+		
 		ScoreJudgeData data1 =new ScoreJudgeData(-1);
 		ScoreJudgeData data2 =new ScoreJudgeData(-1);
 		ScoreJudgeData data3 =new ScoreJudgeData(-1);
@@ -176,22 +182,22 @@ public class MainActivity extends Activity implements OnTouchListener {
         music2_button = (Button) findViewById(R.id.musicbutton2);
         music3_button = (Button)findViewById(R.id.musicbutton3);
       
-        tap_button1 = (ImageView) findViewById(R.id.TapImage1);
-        tap_button2 = (ImageView) findViewById(R.id.TapImage2);
-        tap_button3 = (ImageView) findViewById(R.id.TapImage3);
-        tap_button4 = (ImageView) findViewById(R.id.TapImage4);
-        tap_button5 = (ImageView) findViewById(R.id.TapImage5);
-        tap_button6 = (ImageView) findViewById(R.id.TapImage6);
-        tap_button7 = (ImageView) findViewById(R.id.TapImage7);
-        tap_button8 = (ImageView) findViewById(R.id.TapImage8);
-        tap_button9 = (ImageView) findViewById(R.id.TapImage9);
-        tap_button10 = (ImageView) findViewById(R.id.TapImage10);
-        tap_button11 = (ImageView) findViewById(R.id.TapImage11);
-        tap_button12 = (ImageView) findViewById(R.id.TapImage12);
-        tap_button13 = (ImageView) findViewById(R.id.TapImage13);
-        tap_button14 = (ImageView) findViewById(R.id.TapImage14);
-        tap_button15 = (ImageView) findViewById(R.id.TapImage15);
-        tap_button16 = (ImageView) findViewById(R.id.TapImage16);
+        tap_button[0] = (ImageView) findViewById(R.id.TapImage1);
+        tap_button[1] = (ImageView) findViewById(R.id.TapImage2);
+        tap_button[2] = (ImageView) findViewById(R.id.TapImage3);
+        tap_button[3] = (ImageView) findViewById(R.id.TapImage4);
+        tap_button[4] = (ImageView) findViewById(R.id.TapImage5);
+        tap_button[5] = (ImageView) findViewById(R.id.TapImage6);
+        tap_button[6] = (ImageView) findViewById(R.id.TapImage7);
+        tap_button[7] = (ImageView) findViewById(R.id.TapImage8);
+        tap_button[8] = (ImageView) findViewById(R.id.TapImage9);
+        tap_button[9] = (ImageView) findViewById(R.id.TapImage10);
+        tap_button[10] = (ImageView) findViewById(R.id.TapImage11);
+        tap_button[11] = (ImageView) findViewById(R.id.TapImage12);
+        tap_button[12] = (ImageView) findViewById(R.id.TapImage13);
+        tap_button[13] = (ImageView) findViewById(R.id.TapImage14);
+        tap_button[14] = (ImageView) findViewById(R.id.TapImage15);
+        tap_button[15] = (ImageView) findViewById(R.id.TapImage16);
                
         button_1.setOnTouchListener(this);
         button_2.setOnTouchListener(this);
@@ -230,7 +236,26 @@ public class MainActivity extends Activity implements OnTouchListener {
 			public void onClick(View v) {
 				
 				mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[1]);
-				mediaplayer.start();
+				/*mediaplayer.start();*/
+				
+				// タイマー1をセット
+		        timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
+				timer =new Timer();
+				timer.schedule(timerTask0,1000);
+				
+				/*for(int i=0; i < timertaskAni.length; i++) {*/
+				timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
+				timertaskAni[1] = new AnimationTask(MainActivity.this,handler,tap_button[1]);
+				/*}*/
+				
+				timer.schedule(timertaskAni[0], 1000); timer.schedule(timertaskAni[1], 1100); /*timer.schedule(timertaskAni[2], 1200); 
+				timer.schedule(timertaskAni[3], 1300); timer.schedule(timertaskAni[4], 1400); timer.schedule(timertaskAni[5], 1500); 
+				timer.schedule(timertaskAni[6], 1600); timer.schedule(timertaskAni[7], 1700); timer.schedule(timertaskAni[8], 1800); 
+				timer.schedule(timertaskAni[9], 1900); timer.schedule(timertaskAni[10], 2000); timer.schedule(timertaskAni[11], 2100); 
+				timer.schedule(timertaskAni[12], 2200); timer.schedule(timertaskAni[13], 2300); timer.schedule(timertaskAni[14], 2400); 
+				timer.schedule(timertaskAni[15], 2500); */
+				
+				
 				
 				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
 					@Override
@@ -300,24 +325,35 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        start_button.setVisibility(View.INVISIBLE);
 				
 				// タイマー1をセット
-		        
-				timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
+		        timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
 				timer =new Timer();
 				timer.schedule(timerTask0,InterBGM);
+				
+				timerTask0.moveResult();
 				
 				/*現在時刻を取得*/
 				StartTimeMillis = System.currentTimeMillis();
 				
+				
+				/*for(int i=0; i < timertaskAni.length; i++) {
+					timertaskAni[i] = new AnimationTask(MainActivity.this,handler,tap_button[i]);
+				}
+				
+				for(int i=0; i < timing.delay1.length; i++) {
+					timer.schedule(timertaskAni[0], timing.delay1[i]+InterBGM-scheduleSetLagSum);
+				}*/
+				
+				
 				//ボタン1のアニメーションタイマー・タスクのセット
 				for(int i=0; i < timing.delay1.length; i++) {
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button1);
-					timer.schedule(timertask1, timing.delay1[i]+InterBGM-scheduleSetLagSum); 
+					timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
+					timer.schedule(timertaskAni[0], timing.delay1[i]+InterBGM-scheduleSetLagSum); 
 
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data1);
-					timer.schedule(timerTask2, timing.delay1[i] + InterBGM-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[0] = new DataNoTask(MainActivity.this,handler,data1);
+					timer.schedule(timertaskNo[0], timing.delay1[i] + InterBGM-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 					
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data1);
-					timer.schedule(timerTask3, timing.delay1[i] + InterBGM-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
+					timertaskFla[0] = new DataFlagTask(MainActivity.this,handler,data1);
+					timer.schedule(timertaskFla[0], timing.delay1[i] + InterBGM-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -328,14 +364,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag2 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay2.length; i++) {
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button2);
-					timer.schedule(timertask1, timing.delay2[i]+InterBGM-AniTimeLag2-scheduleSetLagSum); 
+					timertaskAni[1] = new AnimationTask(MainActivity.this,handler,tap_button[1]);
+					timer.schedule(timertaskAni[1], timing.delay2[i]+InterBGM-AniTimeLag2-scheduleSetLagSum); 
 
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data2);
-					timer.schedule(timerTask2, timing.delay2[i] + InterBGM-AniTimeLag2-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[1] = new DataNoTask(MainActivity.this,handler,data2);
+					timer.schedule(timertaskNo[1], timing.delay2[i] + InterBGM-AniTimeLag2-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 					
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data2);
-					timer.schedule(timerTask3, timing.delay2[i] + InterBGM-AniTimeLag2-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
+					timertaskFla[1] = new DataFlagTask(MainActivity.this,handler,data2);
+					timer.schedule(timertaskFla[1], timing.delay2[i] + InterBGM-AniTimeLag2-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -346,14 +382,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag3 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay3.length; i++) {
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button3);
-					timer.schedule(timertask1, timing.delay3[i]+InterBGM-AniTimeLag3-scheduleSetLagSum); 
+					timertaskAni[2] = new AnimationTask(MainActivity.this,handler,tap_button[2]);
+					timer.schedule(timertaskAni[2], timing.delay3[i]+InterBGM-AniTimeLag3-scheduleSetLagSum); 
 
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data3);
-					timer.schedule(timerTask2, timing.delay3[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[2] = new DataNoTask(MainActivity.this,handler,data3);
+					timer.schedule(timertaskNo[2], timing.delay3[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 					
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data3);
-					timer.schedule(timerTask3, timing.delay3[i] + InterBGM-AniTimeLag3-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
+					timertaskFla[2] = new DataFlagTask(MainActivity.this,handler,data3);
+					timer.schedule(timertaskFla[2], timing.delay3[i] + InterBGM-AniTimeLag3-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -363,14 +399,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag4 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay4.length; i++) {
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button4);
-					timer.schedule(timertask1, timing.delay4[i]+InterBGM-AniTimeLag4-scheduleSetLagSum); 
+					timertaskAni[3] = new AnimationTask(MainActivity.this,handler,tap_button[3]);
+					timer.schedule(timertaskAni[3], timing.delay4[i]+InterBGM-AniTimeLag4-scheduleSetLagSum); 
 
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data4);
-					timer.schedule(timerTask2, timing.delay4[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[3] = new DataNoTask(MainActivity.this,handler,data4);
+					timer.schedule(timertaskNo[3], timing.delay4[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 					
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data4);
-					timer.schedule(timerTask3, timing.delay4[i] + InterBGM-AniTimeLag4-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
+					timertaskFla[3] = new DataFlagTask(MainActivity.this,handler,data4);
+					timer.schedule(timertaskFla[3], timing.delay4[i] + InterBGM-AniTimeLag4-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -380,14 +416,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag5 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay5.length; i++) {
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button5);
-					timer.schedule(timertask1, timing.delay5[i]+InterBGM-AniTimeLag5-scheduleSetLagSum); 
+					timertaskAni[4] = new AnimationTask(MainActivity.this,handler,tap_button[4]);
+					timer.schedule(timertaskAni[4], timing.delay5[i]+InterBGM-AniTimeLag5-scheduleSetLagSum); 
 
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data5);
-					timer.schedule(timerTask2, timing.delay5[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[4] = new DataNoTask(MainActivity.this,handler,data5);
+					timer.schedule(timertaskNo[4] , timing.delay5[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 					
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data5);
-					timer.schedule(timerTask3, timing.delay5[i] + InterBGM-AniTimeLag5-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
+					timertaskFla[4] = new DataFlagTask(MainActivity.this,handler,data5);
+					timer.schedule(timertaskFla[4], timing.delay5[i] + InterBGM-AniTimeLag5-scheduleSetLagSum +timing.AniDly+(timing.AniDly/2));
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -397,14 +433,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag6 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay6.length; i++) {	
-					TimerTask timertask1 = new AnimationTask(MainActivity.this,handler,tap_button6);
-					timer.schedule(timertask1, timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
+					timertaskAni[5] = new AnimationTask(MainActivity.this,handler,tap_button[5]);
+					timer.schedule(timertaskAni[5], timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
 					
-					TimerTask timerTask2 = new DataNoTask(MainActivity.this,handler,data6);
-					timer.schedule(timerTask2, timing.delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
+					timertaskNo[5] = new DataNoTask(MainActivity.this,handler,data6);
+					timer.schedule(timertaskNo[5], timing.delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask3 = new DataFlagTask(MainActivity.this,handler,data6);
-					timer.schedule(timerTask3, timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[5] = new DataFlagTask(MainActivity.this,handler,data6);
+					timer.schedule(timertaskFla[5], timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum + timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -414,14 +450,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag7 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay7.length; i++) {	
-					TimerTask timertask7 = new AnimationTask(MainActivity.this,handler,tap_button7);
-					timer.schedule(timertask7, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
+					timertaskAni[6] = new AnimationTask(MainActivity.this,handler,tap_button[6]);
+					timer.schedule(timertaskAni[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
 					
-					TimerTask timerTask8 = new DataNoTask(MainActivity.this,handler,data7);
-					timer.schedule(timerTask8, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[6] = new DataNoTask(MainActivity.this,handler,data7);
+					timer.schedule(timertaskNo[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask9 = new DataFlagTask(MainActivity.this,handler,data7);
-					timer.schedule(timerTask9, timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[6] = new DataFlagTask(MainActivity.this,handler,data7);
+					timer.schedule(timertaskFla[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}	
@@ -431,14 +467,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag8 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay8.length; i++) {	
-					TimerTask timertask10 = new AnimationTask(MainActivity.this,handler,tap_button8);
-					timer.schedule(timertask10, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
+					timertaskAni[7] = new AnimationTask(MainActivity.this,handler,tap_button[7]);
+					timer.schedule(timertaskAni[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
 					
-					TimerTask timerTask11 = new DataNoTask(MainActivity.this,handler,data8);
-					timer.schedule(timerTask11, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[7] = new DataNoTask(MainActivity.this,handler,data8);
+					timer.schedule(timertaskNo[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask12 = new DataFlagTask(MainActivity.this,handler,data8);
-					timer.schedule(timerTask12, timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[7] = new DataFlagTask(MainActivity.this,handler,data8);
+					timer.schedule(timertaskFla[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -448,14 +484,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag9 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay9.length; i++) {	
-					TimerTask timertask10 = new AnimationTask(MainActivity.this,handler,tap_button9);
-					timer.schedule(timertask10, timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum);
+					timertaskAni[8] = new AnimationTask(MainActivity.this,handler,tap_button[8]);
+					timer.schedule(timertaskAni[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum);
 					
-					TimerTask timerTask11 = new DataNoTask(MainActivity.this,handler,data9);
-					timer.schedule(timerTask11, timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[8] = new DataNoTask(MainActivity.this,handler,data9);
+					timer.schedule(timertaskNo[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask12 = new DataFlagTask(MainActivity.this,handler,data9);
-					timer.schedule(timerTask12, timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[8] = new DataFlagTask(MainActivity.this,handler,data9);
+					timer.schedule(timertaskFla[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -465,14 +501,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag10 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay10.length; i++) {	
-					TimerTask timertask13= new AnimationTask(MainActivity.this,handler,tap_button10);
-					timer.schedule(timertask13, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
+					timertaskAni[9]= new AnimationTask(MainActivity.this,handler,tap_button[9]);
+					timer.schedule(timertaskAni[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
 					
-					TimerTask timerTask14 = new DataNoTask(MainActivity.this,handler,data10);
-					timer.schedule(timerTask14, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[9] = new DataNoTask(MainActivity.this,handler,data10);
+					timer.schedule(timertaskNo[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask15 = new DataFlagTask(MainActivity.this,handler,data10);
-					timer.schedule(timerTask15, timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[9] = new DataFlagTask(MainActivity.this,handler,data10);
+					timer.schedule(timertaskFla[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -482,14 +518,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag11 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay11.length; i++) {	
-					TimerTask timertask16= new AnimationTask(MainActivity.this,handler,tap_button11);
-					timer.schedule(timertask16, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
+					timertaskAni[10]= new AnimationTask(MainActivity.this,handler,tap_button[10]);
+					timer.schedule(timertaskAni[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
 					
-					TimerTask timerTask17 = new DataNoTask(MainActivity.this,handler,data11);
-					timer.schedule(timerTask17, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[10] = new DataNoTask(MainActivity.this,handler,data11);
+					timer.schedule(timertaskNo[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask18 = new DataFlagTask(MainActivity.this,handler,data11);
-					timer.schedule(timerTask18, timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));		
+					timertaskFla[10] = new DataFlagTask(MainActivity.this,handler,data11);
+					timer.schedule(timertaskFla[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));		
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -499,14 +535,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag12 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay12.length; i++) {	
-					TimerTask timertask19= new AnimationTask(MainActivity.this,handler,tap_button12);
-					timer.schedule(timertask19, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
+					timertaskAni[11]= new AnimationTask(MainActivity.this,handler,tap_button[11]);
+					timer.schedule(timertaskAni[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
 					
-					TimerTask timerTask20 = new DataNoTask(MainActivity.this,handler,data12);
-					timer.schedule(timerTask20, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[11] = new DataNoTask(MainActivity.this,handler,data12);
+					timer.schedule(timertaskNo[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask21 = new DataFlagTask(MainActivity.this,handler,data12);
-					timer.schedule(timerTask21, timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));		
+					timertaskFla[11]= new DataFlagTask(MainActivity.this,handler,data12);
+					timer.schedule(timertaskFla[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));		
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}
@@ -517,14 +553,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag13 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay13.length; i++) {	
-					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button13);
-					timer.schedule(timertask22, timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum); 
+					timertaskAni[12]= new AnimationTask(MainActivity.this,handler,tap_button[12]);
+					timer.schedule(timertaskAni[12], timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum); 
 					
-					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data13);
-					timer.schedule(timerTask23, timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[12] = new DataNoTask(MainActivity.this,handler,data13);
+					timer.schedule(timertaskNo[12] , timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data13);
-					timer.schedule(timerTask24, timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[12] = new DataFlagTask(MainActivity.this,handler,data13);
+					timer.schedule(timertaskFla[12], timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -535,14 +571,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag14 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay14.length; i++) {	
-					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button14);
-					timer.schedule(timertask22, timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum); 
+					timertaskAni[13]= new AnimationTask(MainActivity.this,handler,tap_button[13]);
+					timer.schedule(timertaskAni[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum); 
 					
-					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data14);
-					timer.schedule(timerTask23, timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[13] = new DataNoTask(MainActivity.this,handler,data14);
+					timer.schedule(timertaskNo[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data14);
-					timer.schedule(timerTask24, timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[13] = new DataFlagTask(MainActivity.this,handler,data14);
+					timer.schedule(timertaskFla[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -553,14 +589,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag15 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay15.length; i++) {	
-					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button15);
-					timer.schedule(timertask22, timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum); 
+					timertaskAni[14]= new AnimationTask(MainActivity.this,handler,tap_button[14]);
+					timer.schedule(timertaskAni[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum); 
 					
-					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data15);
-					timer.schedule(timerTask23, timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[14] = new DataNoTask(MainActivity.this,handler,data15);
+					timer.schedule(timertaskNo[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data15);
-					timer.schedule(timerTask24, timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[14] = new DataFlagTask(MainActivity.this,handler,data15);
+					timer.schedule(timertaskFla[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
@@ -571,14 +607,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag16 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay16.length; i++) {	
-					TimerTask timertask22= new AnimationTask(MainActivity.this,handler,tap_button16);
-					timer.schedule(timertask22, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
+					timertaskAni[15]= new AnimationTask(MainActivity.this,handler,tap_button[15]);
+					timer.schedule(timertaskAni[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
 					
-					TimerTask timerTask23 = new DataNoTask(MainActivity.this,handler,data16);
-					timer.schedule(timerTask23, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
+					timertaskNo[15] = new DataNoTask(MainActivity.this,handler,data16);
+					timer.schedule(timertaskNo[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
 
-					TimerTask timerTask24 = new DataFlagTask(MainActivity.this,handler,data16);
-					timer.schedule(timerTask24, timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
+					timertaskFla[15] = new DataFlagTask(MainActivity.this,handler,data16);
+					timer.schedule(timertaskFla[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+timing.AniDly+(timing.AniDly/2));	
 					
 					scheduleSetLagSum +=scheduleSetLag;
 				}		
