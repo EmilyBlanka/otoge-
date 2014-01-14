@@ -52,8 +52,8 @@ public class MainActivity extends Activity implements OnTouchListener {
         };
 		
 		private int[] MusicResouces = {
-                R.raw.bgm1,
-                R.raw.all_beats1,R.raw.fuck_up_backbgm
+                R.raw.bgm1,R.raw.all_beats1,
+                R.raw.fuck_up_backbgm,R.raw.fuck_up_soundrolll
         };
 
         private int[] soundIds;
