@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,11 +61,13 @@ public class MainActivity extends Activity implements OnTouchListener {
 		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7, button_8,button_9,
 		button_10, button_11,button_12, button_13,button_14,button_15,button_16;
 		
-		Button start_button, stay_button, return_button;		
+		Button start_button, /*stay_button,*/ return_button;		
 		
 		Button music1_button, music2_button,music3_button;
 	
 		ImageView[] tap_button=new ImageView[16];
+		
+		static String title;
 		
 		Timer timer;
 		
@@ -174,7 +177,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         button_14 = (Button) findViewById(R.id.TapButton14); button_14.setBackgroundResource(android.R.drawable.btn_default); 
         button_15 = (Button) findViewById(R.id.TapButton15); button_15.setBackgroundResource(android.R.drawable.btn_default);
            
-        stay_button = (Button) findViewById(R.id.StayButton1);
+       /* stay_button = (Button) findViewById(R.id.StayButton1);*/
         return_button = (Button) findViewById(R.id.ReturnButton1);
         start_button = (Button)findViewById(R.id.StartButton1);
         
@@ -218,14 +221,24 @@ public class MainActivity extends Activity implements OnTouchListener {
                 
         handler = new Handler();
         mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[0]);
+        title ="first kichen";
+        
+        music1_button.setTextColor(Color.parseColor("blue"));
+        music1_button.setEnabled(false);
         
        //一次停止とリターンボタンを最初非表示
-        stay_button.setVisibility(View.INVISIBLE);
+       /* stay_button.setVisibility(View.INVISIBLE);*/
         return_button.setVisibility(View.INVISIBLE);
         
         music1_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//buttonの有効/無効化とテキストカラーの変更
+				music1_button.setTextColor(Color.parseColor("blue")); music1_button.setEnabled(false);
+		        music2_button.setTextColor(Color.parseColor("black"));music2_button.setEnabled(true);
+		        
+		        title ="first kichen";
+				
 				timing.setmusic2();
 				
 			}
@@ -234,6 +247,11 @@ public class MainActivity extends Activity implements OnTouchListener {
         music2_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				//buttonの有効/無効化とテキストカラーの変更
+				music2_button.setTextColor(Color.parseColor("blue")); music2_button.setEnabled(false);
+		        music1_button.setTextColor(Color.parseColor("black"));music1_button.setEnabled(true);
+		        
+		        title ="fuckup";
 				
 				mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[1]);
 				/*mediaplayer.start();*/
@@ -320,7 +338,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			public void onClick(View v) {
 				
 				//一次停止とリターンボタンを表示、スタートボタンを非表示
-		        stay_button.setVisibility(View.INVISIBLE);
+		       /* stay_button.setVisibility(View.INVISIBLE);*/
 		        return_button.setVisibility(View.VISIBLE);                                                     
 		        start_button.setVisibility(View.INVISIBLE);
 				
@@ -624,7 +642,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		
     
-	    stay_button.setOnClickListener(new View.OnClickListener() {
+	   /* stay_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//一次停止とリターンボタンを表示、スタートボタンを非表示
@@ -634,16 +652,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 			
 			}
 		});
-	    
+	    */
 	    return_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//一次停止とリターンボタンを表示、スタートボタンを非表示
-		        stay_button.setVisibility(View.INVISIBLE);
+		       /* stay_button.setVisibility(View.INVISIBLE);*/
 		        return_button.setVisibility(View.INVISIBLE);
 		        start_button.setVisibility(View.VISIBLE);
 		       
 		        Intent intent=new Intent(getApplicationContext(),ResultActivity.class);
+		        intent.putExtra("title",title);
 		        intent.putExtra("returnscore",result.score);
 		        intent.putExtra("returnmaxcombo",result.MaxCombo);
 		        intent.putExtra("returngreatNo",result.greatNo);
@@ -1515,7 +1534,14 @@ public class MainActivity extends Activity implements OnTouchListener {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
-
-
     
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // BackBtnアクション
+        if(keyCode==KeyEvent.KEYCODE_BACK){
+             finish();
+        }
+		return false;
+    }
+
 }

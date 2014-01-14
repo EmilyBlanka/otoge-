@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ResultActivity extends Activity {
@@ -25,6 +26,8 @@ public class ResultActivity extends Activity {
 	private int tempoScoreAve;
 	
 	Button	continue_button, end_button;
+	
+	ImageView rank;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,8 @@ public class ResultActivity extends Activity {
 		
 		continue_button = (Button)findViewById(R.id.continue_button);
 		end_button = (Button)findViewById(R.id.end_button);
+		
+		rank = (ImageView) findViewById(R.id.imageView1);
 		
 		//既存情報(maxcomboの数とmaxscore)情報の受け取り
 		Bundle extras00 = getIntent().getExtras();
@@ -80,19 +85,34 @@ public class ResultActivity extends Activity {
 		TextView textView10 = (TextView) findViewById(R.id.textMAX_BAD);
 		textView10.setText(stringscore10 +"/"+stringscore01);//Maｘbad情報
 		
-	
+		String title_name = getIntent().getStringExtra("title");
+		TextView textView11 = (TextView) findViewById(R.id.title_text);
+		textView11.setText(title_name);		
+		
+		//ランクの表示
+		if(0<=tempoScoreAve && tempoScoreAve<50){
+			rank.setImageResource(R.drawable.beginner_image1);
+		} else if (50<=tempoScoreAve && tempoScoreAve<90) {
+			rank.setImageResource(R.drawable.amateur_image1);
+		} else if (90<=tempoScoreAve &&tempoScoreAve<=100) {
+			rank.setImageResource(R.drawable.professional_image1);
+		}
+		
 		continue_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-		
+				
+			Intent intent=new Intent(getApplicationContext(),MainActivity.class);	
+			startActivity(intent);
 			
-	
 			}
 		});
 		
 		end_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				finish();
+			
 		
 			
 	
@@ -107,5 +127,14 @@ public class ResultActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	 @Override
+	    public boolean onKeyDown(int keyCode, KeyEvent event) {
+	        // BackBtnアクション
+	        if(keyCode==KeyEvent.KEYCODE_BACK){
+	             finish();
+	        }
+			return false;
+	    }
 
 }

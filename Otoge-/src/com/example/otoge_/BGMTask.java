@@ -51,6 +51,7 @@ public class BGMTask extends TimerTask {
 			public void onCompletion(MediaPlayer mp) {
 				// TODO 自動生成されたメソッド・スタブ
 				Intent intent=new Intent(activity.getApplicationContext(),ResultActivity.class);
+				intent.putExtra("title",MainActivity.title);
 				intent.putExtra("returnscore",result.score);
 		        intent.putExtra("returnmaxcombo",result.MaxCombo);
 		        intent.putExtra("returngreatNo",result.greatNo);
