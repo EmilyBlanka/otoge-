@@ -597,7 +597,6 @@
             android:layout_weight="3"
             android:background="@drawable/txtback01"
             android:padding="5dp"
-            android:text="ここにスコアを表示"
             android:textColor="#ffffffff" />
 
 
@@ -609,7 +608,6 @@
             android:layout_weight="3"
             android:background="@drawable/txtback01"
             android:padding="5dp"
-            android:text="ここにコンボを表示"
             android:textColor="#ffffffff" />
 
 

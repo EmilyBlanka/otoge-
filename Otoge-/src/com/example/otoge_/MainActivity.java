@@ -7,6 +7,7 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -27,27 +28,22 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnTouchListener {
 	
-		SoundPool sound1, sound2, sound3, sound4, sound5, sound7, sound6, sound8, 
+		SoundPool sound1,sound2, sound3, sound4, sound5, sound7, sound6, sound8, 
 		sound9, sound10, sound11,sound12, sound13,sound14, sound15, sound16;
 		
 		MediaPlayer mediaplayer, mediaplayer1, mediaplayer2, mediaplayer3 ;
 		
 		private int[] soundResouces1 = {
-                R.raw.nosound,
-                R.raw.ride_01,
-                R.raw.bd01,
-                R.raw.kick_02,
-                R.raw.toms132,
-                R.raw.sn_01,
-                R.raw.snare_02,
-                R.raw.crash_01	,
-                R.raw.hanb_clap_01,
+                R.raw.nosound1, R.raw.ride_01,R.raw.nosound2, R.raw.nosound3, 
+                R.raw.nosound4, R.raw.bd01,R.raw.kick_02,R.raw.toms132,
+                R.raw.nosound5, R.raw.sn01 ,R.raw.snare_02,R.raw.crash_01,
+                R.raw.nosound6, R.raw.nosound7, R.raw.nosound8, R.raw.hanb_clap_01,
         };
 		
 		private int[] soundResouces2 = {
                 R.raw.fuck,   R.raw.perc01, R.raw.perc02, R.raw.perc03,
                 R.raw.perc04, R.raw.bd02,  R.raw.sn01,   R.raw.sn02	,
-                R.raw.chip01_, R.raw.clap, R.raw.bongo, R.raw.chip_02,
+                R.raw.chip01, R.raw.clap, R.raw.bongo, R.raw.chip02,
                 R.raw.perc05, R.raw.hh_01, R.raw.sn03, R.raw.fuck_02,
         };
 		
@@ -56,7 +52,7 @@ public class MainActivity extends Activity implements OnTouchListener {
                 R.raw.fuck_up_backbgm,R.raw.fuck_up_soundrolll
         };
 
-        private int[] soundIds;
+        int[] soundIds;
 		
 		Button button_1,button_2,button_3,button_4,button_5,button_6,button_7, button_8,button_9,
 		button_10, button_11,button_12, button_13,button_14,button_15,button_16;
@@ -68,8 +64,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		ImageView[] tap_button=new ImageView[16];
 		
 		static String title;
+		String titleA="First Kichen",titleB="F××k Up";
 		
-		Timer timer;
 		
 		TimerTask[] timertaskAni = new TimerTask[16];
 		TimerTask[] timertaskFla = new TimerTask[16];
@@ -77,6 +73,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		BGMTask timerTask0;
 		Handler handler;
+		Timer timer;
 		
 		private long AniTimeLag2,AniTimeLag3,AniTimeLag4,AniTimeLag5,AniTimeLag6,AniTimeLag7,
 		AniTimeLag8,AniTimeLag9,AniTimeLag10,AniTimeLag11,AniTimeLag12,AniTimeLag13,AniTimeLag14,AniTimeLag15,AniTimeLag16;
@@ -89,8 +86,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 		long scheduleSetLagSum=0;
 	
 		TimingData timing =new TimingData(1);
-		
-		/*ScoreJudgeData[] data =new ScoreJudgeData[];*/
 		
 		ScoreJudgeData data1 =new ScoreJudgeData(-1);
 		ScoreJudgeData data2 =new ScoreJudgeData(-1);
@@ -114,53 +109,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		ResultData result =new ResultData(MaxComboNo);
 		
-
+		
 		@Override
 		protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE); 
 		setContentView(R.layout.activity_main);
 		
-		//今起動しているコンテキストを代入しようね。起動していないところの場所で使いたい。
-		/*context=this;*/
-		
-		/*soundPool = new SoundPool(16, AudioManager.STREAM_MUSIC, 0);*/
-		sound1 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound2 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound3 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound4 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound5 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound6 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound7 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound8 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-		sound9 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound10 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound11 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound12 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound13 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound14 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound15 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        sound16 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-        
-		soundIds = new int[16];
-		soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
-		soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
-		soundIds[2] = sound3.load(this, soundResouces1[0], 1 );
-		soundIds[3] = sound4.load(this, soundResouces1[0], 1 );
-		soundIds[4] = sound5.load(this, soundResouces1[0], 1 );
-		soundIds[5] = sound6.load(this, soundResouces1[2], 1 );
-		soundIds[6] = sound7.load(this, soundResouces1[3], 1 );
-		soundIds[7] = sound8.load(this, soundResouces1[4], 1 );
-		soundIds[8] = sound9.load(this, soundResouces1[0], 1 );
-		soundIds[9] = sound10.load(this, soundResouces1[5], 1 );
-		soundIds[10] = sound11.load(this, soundResouces1[6], 1 );
-		soundIds[11] = sound12.load(this, soundResouces1[7], 1 );
-		soundIds[12] = sound13.load(this, soundResouces1[0], 1 );
-		soundIds[13] = sound14.load(this, soundResouces1[0], 1 );
-		soundIds[14] = sound15.load(this, soundResouces1[0], 1 );
-		soundIds[15] = sound16.load(this, soundResouces1[8], 1 );	
-        
-        button_2 = (Button) findViewById(R.id.TapButton2); button_2.setBackgroundResource(android.R.drawable.btn_default);
+		button_2 = (Button) findViewById(R.id.TapButton2); button_2.setBackgroundResource(android.R.drawable.btn_default);
         button_6 = (Button) findViewById(R.id.TapButton6); button_6.setBackgroundResource(android.R.drawable.btn_default);
         button_7 = (Button) findViewById(R.id.TapButton7); button_7.setBackgroundResource(android.R.drawable.btn_default);
         button_8 = (Button) findViewById(R.id.TapButton8); button_8.setBackgroundResource(android.R.drawable.btn_default);
@@ -220,11 +176,11 @@ public class MainActivity extends Activity implements OnTouchListener {
         button_16.setOnTouchListener(this);
                 
         handler = new Handler();
-        mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[0]);
-        title ="first kichen";
+        title =titleA;
         
         music1_button.setTextColor(Color.parseColor("blue"));
         music1_button.setEnabled(false);
+        start_button.setVisibility(View.INVISIBLE);
         
        //一次停止とリターンボタンを最初非表示
        /* stay_button.setVisibility(View.INVISIBLE);*/
@@ -233,13 +189,76 @@ public class MainActivity extends Activity implements OnTouchListener {
         music1_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
+				/*soundpool.release();
+				soundpool = null;
+				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );*/
+				
+				soundIds = new int[16];
+				soundIds[0] = sound1.load(getBaseContext(), soundResouces1[0], 1 );
+				soundIds[1] = sound2.load(getBaseContext(), soundResouces1[1], 1 );
+				soundIds[2] = sound3.load(getBaseContext(), soundResouces1[2], 1 );
+				soundIds[3] = sound4.load(getBaseContext(), soundResouces1[3], 1 );
+				soundIds[4] = sound5.load(getBaseContext(), soundResouces1[4], 1 );
+				soundIds[5] = sound6.load(getBaseContext(), soundResouces1[5], 1 );
+				soundIds[6] = sound7.load(getBaseContext(), soundResouces1[6], 1 );
+				soundIds[7] = sound8.load(getBaseContext(), soundResouces1[7], 1 );
+				soundIds[8] = sound9.load(getBaseContext(), soundResouces1[8], 1 );
+				soundIds[9] = sound10.load(getBaseContext(), soundResouces1[9], 1 );
+				soundIds[10] = sound11.load(getBaseContext(), soundResouces1[10], 1 );
+				soundIds[11] = sound12.load(getBaseContext(), soundResouces1[11], 1 );
+				soundIds[12] = sound13.load(getBaseContext(), soundResouces1[12], 1 );
+				soundIds[13] = sound14.load(getBaseContext(), soundResouces1[13], 1 );
+				soundIds[14] = sound15.load(getBaseContext(), soundResouces1[14], 1 );
+				soundIds[15] = sound16.load(getBaseContext(), soundResouces1[15], 1 );
+			
+				
+				start_button.setVisibility(View.INVISIBLE);
 				//buttonの有効/無効化とテキストカラーの変更
 				music1_button.setTextColor(Color.parseColor("blue")); music1_button.setEnabled(false);
 		        music2_button.setTextColor(Color.parseColor("black"));music2_button.setEnabled(true);
 		        
-		        title ="first kichen";
+		        title =titleA;
+		        
+		        mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[1]);
+		        
+		        // タイマー1をセット
+		        timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
+				timer =new Timer();
+				timer.schedule(timerTask0,1000);
 				
-				timing.setmusic2();
+				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mediaplayer.release();
+						mediaplayer = null;
+						mediaplayer = new MediaPlayer();
+						
+						try {
+							String test = "android.resource://"+getBaseContext().getPackageName()+"/"+R.raw.bgm1;
+							mediaplayer.setDataSource(getBaseContext(), Uri.parse(test));
+							mediaplayer.prepare();
+						} catch (IllegalArgumentException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (SecurityException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (IllegalStateException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						} catch (IOException e) {
+							// TODO 自動生成された catch ブロック
+							e.printStackTrace();
+						}	
+					}
+				});	
+				
+				
+				timing.setmusic1();
+				
+				//
+				start_button.setVisibility(View.VISIBLE);
 				
 			}
 		});
@@ -247,13 +266,41 @@ public class MainActivity extends Activity implements OnTouchListener {
         music2_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				
+				/*soundpool.release();
+				soundpool = null;
+				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );*/
+				/*for(int i=0; i < timing.delay1.length; i++) {
+					
+				}
+				*/
+				
+				soundIds[0] = sound1.load(getBaseContext(), soundResouces2[0], 1 );
+				soundIds[1] = sound2.load(getBaseContext(), soundResouces2[1], 1 );
+				soundIds[2] = sound3.load(getBaseContext(), soundResouces2[2], 1 );
+				soundIds[3] = sound4.load(getBaseContext(), soundResouces2[3], 1 );
+				soundIds[4] = sound5.load(getBaseContext(), soundResouces2[4], 1 );
+				soundIds[5] = sound6.load(getBaseContext(), soundResouces2[5], 1 );
+				soundIds[6] = sound7.load(getBaseContext(), soundResouces2[6], 1 );
+				soundIds[7] = sound8.load(getBaseContext(), soundResouces2[7], 1 );
+				soundIds[8] = sound8.load(getBaseContext(), soundResouces2[8], 1 );
+				soundIds[9] = sound10.load(getBaseContext(), soundResouces2[9], 1 );
+				soundIds[10] = sound11.load(getBaseContext(), soundResouces2[10], 1 );
+				soundIds[11] = sound12.load(getBaseContext(), soundResouces2[11], 1 );
+				soundIds[12] = sound13.load(getBaseContext(), soundResouces2[12], 1 );
+				soundIds[13] = sound14.load(getBaseContext(), soundResouces2[13], 1 );
+				soundIds[14] = sound15.load(getBaseContext(), soundResouces2[14], 1 );
+				soundIds[15] = sound16.load(getBaseContext(), soundResouces2[15], 1 );	
+				
+				//
+				start_button.setVisibility(View.INVISIBLE);
 				//buttonの有効/無効化とテキストカラーの変更
 				music2_button.setTextColor(Color.parseColor("blue")); music2_button.setEnabled(false);
 		        music1_button.setTextColor(Color.parseColor("black"));music1_button.setEnabled(true);
 		        
-		        title ="fuckup";
+		        title =titleB;
 				
-				mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[1]);
+				mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[3]);
 				/*mediaplayer.start();*/
 				
 				// タイマー1をセット
@@ -301,25 +348,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 						}	
 					}
 				});	
-			
-				soundIds[0] = sound1.load(getBaseContext(), soundResouces2[0], 1 );
-				soundIds[1] = sound2.load(getBaseContext(), soundResouces2[1], 1 );
-				soundIds[2] = sound3.load(getBaseContext(), soundResouces2[2], 1 );
-				soundIds[3] = sound4.load(getBaseContext(), soundResouces2[3], 1 );
-				soundIds[4] = sound5.load(getBaseContext(), soundResouces2[4], 1 );
-				soundIds[5] = sound6.load(getBaseContext(), soundResouces2[5], 1 );
-				soundIds[6] = sound7.load(getBaseContext(), soundResouces2[6], 1 );
-				soundIds[7] = sound8.load(getBaseContext(), soundResouces2[7], 1 );
-				soundIds[8] = sound9.load(getBaseContext(), soundResouces2[8], 1 );
-				soundIds[9] = sound10.load(getBaseContext(), soundResouces2[9], 1 );
-				soundIds[10] = sound11.load(getBaseContext(), soundResouces2[10], 1 );
-				soundIds[11] = sound12.load(getBaseContext(), soundResouces2[11], 1 );
-				soundIds[12] = sound13.load(getBaseContext(), soundResouces2[12], 1 );
-				soundIds[13] = sound14.load(getBaseContext(), soundResouces2[13], 1 );
-				soundIds[14] = sound15.load(getBaseContext(), soundResouces2[14], 1 );
-				soundIds[15] = sound16.load(getBaseContext(), soundResouces2[15], 1 );	
 				
 				timing.setmusic2();
+				
+				//
+				start_button.setVisibility(View.VISIBLE);
 			}
 		});
     
@@ -332,6 +365,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
         
+	}
+		
+	private void timerStart() {
+		mediaplayer =MediaPlayer.create(getBaseContext(),MusicResouces[0]);
+		
 		// タイマー開始ボタンの処理
 		start_button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -640,20 +678,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
 		
-		
-    
-	   /* stay_button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				//一次停止とリターンボタンを表示、スタートボタンを非表示
-		        stay_button.setVisibility(View.INVISIBLE);
-		        return_button.setVisibility(View.INVISIBLE);
-		        start_button.setVisibility(View.VISIBLE);
-			
-			}
-		});
-	    */
-	    return_button.setOnClickListener(new View.OnClickListener() {
+		return_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				//一次停止とリターンボタンを表示、スタートボタンを非表示
@@ -677,9 +702,163 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        timer.cancel();      
 		    }
 		});
-    }
-    
-    @Override
+	}
+		
+			
+
+	@Override
+	protected void onStart() {
+		// TODO 自動生成されたメソッド・スタブ
+		super.onStart();
+		
+		timerStart();
+		
+		result.score=0;
+		result.comboNo=0;
+		result.MaxCombo=0;
+		result.greatNo =0;
+		result.goodNo =0;
+		result.badNo =0;
+		result.comboNo =0;
+		
+		data1.no=-1;data2.no=-1;data3.no=-1;data4.no=-1;data5.no=-1;data6.no=-1;data7.no=-1;data8.no=-1;
+		data1.no=-1;data9.no=-1;data10.no=-1;data11.no=-1;data12.no=-1;data13.no=-1;data14.no=-1;data15.no=-1;
+		
+		//scoreをテキストビューに表示
+		String stringscore = String.valueOf(result.score());
+		TextView textView0 = (TextView) findViewById(R.id.textView1);
+		textView0.setText(stringscore);
+		
+		//プレイ中のcombo数をテキストに表示
+		String stringcombo = String.valueOf(result.comboNo());
+		TextView textView00 = (TextView) findViewById(R.id.textView2);
+		textView00.setText(stringcombo);
+		
+		start_button.setVisibility(View.VISIBLE);
+	}
+
+	
+	@Override
+	protected void onResume() {
+		// TODO 自動生成されたメソッド・スタブ
+		super.onResume();
+
+	    // 音をロードしておく
+		//soundpoolクラス16個をnewで作成
+				
+				sound1 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound2 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound3 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound4 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound5 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound6 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound7 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound8 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				sound9 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound10 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound11 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound12 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound13 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound14 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound15 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+		        sound16 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+				
+		        sound1.setOnLoadCompleteListener(new OnLoadCompleteListener(){
+
+					@Override
+					public void onLoadComplete(SoundPool arg0, int arg1,
+							int arg2) {
+						// TODO 自動生成されたメソッド・スタブ
+						Log.d("aaaaa", String.format("dddddd_%d:%d ", arg1,arg2));
+					}
+					
+				});
+		        sound10.setOnLoadCompleteListener(new OnLoadCompleteListener(){
+
+					@Override
+					public void onLoadComplete(SoundPool arg0, int arg1,
+							int arg2) {
+						// TODO 自動生成されたメソッド・スタブ
+						Log.d("aaaaa", String.format("dddddd_%d:%d ", arg1,arg2));
+					}
+					
+				});
+		        sound16.setOnLoadCompleteListener(new OnLoadCompleteListener(){
+
+					@Override
+					public void onLoadComplete(SoundPool arg0, int arg1,
+							int arg2) {
+						// TODO 自動生成されたメソッド・スタブ
+						Log.d("aaaaa", String.format("dddddd_%d:%d ", arg1,arg2));
+					}
+					
+				});
+				
+		        
+				soundIds = new int[16];
+				soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
+				soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
+				soundIds[2] = sound3.load(this, soundResouces1[2], 1 );
+				soundIds[3] = sound4.load(this, soundResouces1[3], 1 );
+				soundIds[4] = sound5.load(this, soundResouces1[4], 1 );
+				soundIds[5] = sound6.load(this, soundResouces1[5], 1 );
+				soundIds[6] = sound7.load(this, soundResouces1[6], 1 );
+				soundIds[7] = sound8.load(this, soundResouces1[7], 1 );
+				soundIds[8] = sound9.load(this, soundResouces1[8], 1 );
+				soundIds[9] = sound10.load(this, soundResouces1[9], 1 );
+				soundIds[10] = sound11.load(this, soundResouces1[10], 1 );
+				soundIds[11] = sound12.load(this, soundResouces1[11], 1 );
+				soundIds[12] = sound13.load(this, soundResouces1[12], 1 );
+				soundIds[13] = sound14.load(this, soundResouces1[13], 1 );
+				soundIds[14] = sound15.load(this, soundResouces1[14], 1 );
+				soundIds[15] = sound16.load(this, soundResouces1[15], 1 );
+				
+				/*soundIds = new int[16];
+				soundIds[0] = soundpool.load(this, soundResouces2[1], 1 );
+				soundIds[1] = soundpool.load(this, soundResouces1[1], 1 );
+				soundIds[2] = soundIds[0];
+				soundIds[3] = soundIds[0];
+				soundIds[4] = soundIds[0];
+				soundIds[5] = soundpool.load(this, soundResouces1[2], 1 );
+				soundIds[6] = soundpool.load(this, soundResouces1[3], 1 );
+				soundIds[7] = soundpool.load(this, soundResouces1[4], 1 );
+				soundIds[8] = soundIds[0];
+				soundIds[9] = soundpool.load(this, soundResouces1[5], 1 );
+				soundIds[10] = soundpool.load(this, soundResouces1[6], 1 );
+				soundIds[11] = soundpool.load(this, soundResouces1[7], 1 );
+				soundIds[12] = soundIds[0];
+				soundIds[13] = soundIds[0];
+				soundIds[14] = soundIds[0];
+				soundIds[15] = soundpool.load(this, soundResouces1[8], 1 );*/
+				
+				/*soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
+				soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
+				soundIds[2] = sound3.load(this, soundResouces1[0], 1 );
+				soundIds[3] = sound4.load(this, soundResouces1[0], 1 );
+				soundIds[4] = sound5.load(this, soundResouces1[0], 1 );
+				soundIds[5] = sound6.load(this, soundResouces1[2], 1 );
+				soundIds[6] = sound7.load(this, soundResouces1[3], 1 );
+				soundIds[7] = sound8.load(this, soundResouces1[4], 1 );
+				soundIds[8] = sound9.load(this, soundResouces1[0], 1 );
+				soundIds[9] = sound10.load(this, soundResouces1[5], 1 );
+				soundIds[10] = sound11.load(this, soundResouces1[6], 1 );
+				soundIds[11] = sound12.load(this, soundResouces1[7], 1 );
+				soundIds[12] = sound13.load(this, soundResouces1[0], 1 );
+				soundIds[13] = sound14.load(this, soundResouces1[0], 1 );
+				soundIds[14] = sound15.load(this, soundResouces1[0], 1 );
+				soundIds[15] = sound16.load(this, soundResouces1[8], 1 );	*/
+	}
+
+	@Override
+	protected void onPause() {
+		// TODO 自動生成されたメソッド・スタブ
+		super.onPause();
+	    // 音をリリース
+	    sound1.release();
+	}
+
+		
+	@Override
 	public boolean onTouch(View v, MotionEvent event) {
 		// TODO Auto-generated method stub
 		
@@ -689,6 +868,17 @@ public class MainActivity extends Activity implements OnTouchListener {
 		
 		TouchTimeMillis = System.currentTimeMillis();
 		Time =TouchTimeMillis-StartTimeMillis;
+		
+		//scoreをテキストビューに表示
+		String stringscore = String.valueOf(result.score());
+		TextView textView0 = (TextView) findViewById(R.id.textView1);
+		textView0.setText(stringscore);
+		
+		//プレイ中のcombo数をテキストに表示
+		String stringcombo = String.valueOf(result.comboNo());
+		TextView textView00 = (TextView) findViewById(R.id.textView2);
+		textView00.setText(stringcombo);
+		 
 		
 		if((event.getAction() == MotionEvent.ACTION_DOWN) || (event.getAction() == MotionEvent.ACTION_POINTER_DOWN)) {
 			switch (v.getId()) {
@@ -1434,16 +1624,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				}	
 			}
 			
-			//scoreをテキストビューに表示
-			String stringscore = String.valueOf(result.score());
-			TextView textView0 = (TextView) findViewById(R.id.textView1);
-			textView0.setText(stringscore);
 			
-			//プレイ中のcombo数をテキストに表示
-			String stringcombo = String.valueOf(result.comboNo());
-			TextView textView00 = (TextView) findViewById(R.id.textView2);
-			textView00.setText(stringcombo);
-			 
 			
 			
 			return true;
@@ -1471,7 +1652,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 			case R.id.TapButton6:
 				button_6.setBackgroundResource(android.R.drawable.btn_default);
-				sound5.stop(soundIds[5]);
+				sound6.stop(soundIds[5]);
 				break;
 			case R.id.TapButton7:
 				button_7.setBackgroundResource(android.R.drawable.btn_default);
@@ -1521,11 +1702,13 @@ public class MainActivity extends Activity implements OnTouchListener {
     
     
 
-    @Override
+   /* @Override
     protected void onDestroy() {
         Log.d("FinishTest", "onDestroy");
+        timerTask0.stopBGM();
+        timer.cancel();    
     	super.onDestroy();
-    }
+    }*/
 
 
     @Override
@@ -1535,13 +1718,13 @@ public class MainActivity extends Activity implements OnTouchListener {
         return true;
     }
     
-    @Override
+    /*@Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         // BackBtnアクション
         if(keyCode==KeyEvent.KEYCODE_BACK){
              finish();
         }
 		return false;
-    }
+    }*/
 
 }

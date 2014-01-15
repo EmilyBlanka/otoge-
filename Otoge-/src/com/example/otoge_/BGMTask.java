@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Handler;
 import android.util.Log;
@@ -42,7 +43,10 @@ public class BGMTask extends TimerTask {
 		if (mediaplayer.isPlaying()) {
         	mediaplayer.stop();
         	mediaplayer.release();
-        } 
+        	mediaplayer = null;
+
+        } else {
+        }
 	}
 	
 	public void moveResult() {

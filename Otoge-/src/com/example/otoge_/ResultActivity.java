@@ -102,8 +102,7 @@ public class ResultActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				
-			Intent intent=new Intent(getApplicationContext(),MainActivity.class);	
-			startActivity(intent);
+			finish();
 			
 			}
 		});
@@ -133,6 +132,8 @@ public class ResultActivity extends Activity {
 	        // BackBtnƒAƒNƒVƒ‡ƒ“
 	        if(keyCode==KeyEvent.KEYCODE_BACK){
 	             finish();
+	             /*Intent intent=new Intent(getApplicationContext(),MainActivity.class);	
+	 			startActivity(intent);*/
 	        }
 			return false;
 	    }
