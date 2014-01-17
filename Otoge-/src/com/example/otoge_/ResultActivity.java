@@ -36,7 +36,6 @@ public class ResultActivity extends Activity {
 		setContentView(R.layout.activity_result);
 		
 		continue_button = (Button)findViewById(R.id.continue_button);
-		end_button = (Button)findViewById(R.id.end_button);
 		
 		rank = (ImageView) findViewById(R.id.imageView1);
 		
@@ -107,7 +106,7 @@ public class ResultActivity extends Activity {
 			}
 		});
 		
-		end_button.setOnClickListener(new View.OnClickListener() {
+		/*end_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				finish();
@@ -116,7 +115,7 @@ public class ResultActivity extends Activity {
 			
 	
 			}
-		});
+		});*/
 	}
 
 		

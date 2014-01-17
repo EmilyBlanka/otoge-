@@ -54,6 +54,8 @@ public class BGMTask extends TimerTask {
 			@Override
 			public void onCompletion(MediaPlayer mp) {
 				// TODO 自動生成されたメソッド・スタブ
+				
+				
 				Intent intent=new Intent(activity.getApplicationContext(),ResultActivity.class);
 				intent.putExtra("title",MainActivity.title);
 				intent.putExtra("returnscore",result.score);

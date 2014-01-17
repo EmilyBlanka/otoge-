@@ -28,15 +28,17 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity implements OnTouchListener {
 	
-		SoundPool sound1,sound2, sound3, sound4, sound5, sound7, sound6, sound8, 
-		sound9, sound10, sound11,sound12, sound13,sound14, sound15, sound16;
+		/*SoundPool sound1,sound2, sound3, sound4, sound5, sound7, sound6, sound8, 
+		sound9, sound10, sound11,sound12, sound13,sound14, sound15, sound16;*/
 		
+		SoundPool soundpool;	
+	
 		MediaPlayer mediaplayer, mediaplayer1, mediaplayer2, mediaplayer3 ;
 		
 		private int[] soundResouces1 = {
                 R.raw.nosound1, R.raw.ride_01,R.raw.nosound2, R.raw.nosound3, 
-                R.raw.nosound4, R.raw.bd01,R.raw.kick_02,R.raw.toms132,
-                R.raw.nosound5, R.raw.sn01 ,R.raw.snare_02,R.raw.crash_01,
+                R.raw.bd03, R.raw.bd01,R.raw.kick_02,R.raw.toms132,
+                R.raw.nosound5, R.raw.sn ,R.raw.snare_02,R.raw.crash_01,
                 R.raw.nosound6, R.raw.nosound7, R.raw.nosound8, R.raw.hanb_clap_01,
         };
 		
@@ -190,12 +192,12 @@ public class MainActivity extends Activity implements OnTouchListener {
 			@Override
 			public void onClick(View v) {
 				
-				/*soundpool.release();
+				soundpool.release();
 				soundpool = null;
-				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );*/
+				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );
 				
 				soundIds = new int[16];
-				soundIds[0] = sound1.load(getBaseContext(), soundResouces1[0], 1 );
+				/*soundIds[0] = sound1.load(getBaseContext(), soundResouces1[0], 1 );
 				soundIds[1] = sound2.load(getBaseContext(), soundResouces1[1], 1 );
 				soundIds[2] = sound3.load(getBaseContext(), soundResouces1[2], 1 );
 				soundIds[3] = sound4.load(getBaseContext(), soundResouces1[3], 1 );
@@ -210,7 +212,24 @@ public class MainActivity extends Activity implements OnTouchListener {
 				soundIds[12] = sound13.load(getBaseContext(), soundResouces1[12], 1 );
 				soundIds[13] = sound14.load(getBaseContext(), soundResouces1[13], 1 );
 				soundIds[14] = sound15.load(getBaseContext(), soundResouces1[14], 1 );
-				soundIds[15] = sound16.load(getBaseContext(), soundResouces1[15], 1 );
+				soundIds[15] = sound16.load(getBaseContext(), soundResouces1[15], 1 );*/
+				
+				soundIds[0] = soundpool.load(getBaseContext(), soundResouces1[0], 1 );
+				soundIds[1] = soundpool.load(getBaseContext(), soundResouces1[1], 1 );
+				soundIds[2] = soundpool.load(getBaseContext(), soundResouces1[2], 1 );
+				soundIds[3] = soundpool.load(getBaseContext(), soundResouces1[3], 1 );
+				soundIds[4] = soundpool.load(getBaseContext(), soundResouces1[4], 1 );
+				soundIds[5] = soundpool.load(getBaseContext(), soundResouces1[5], 1 );
+				soundIds[6] = soundpool.load(getBaseContext(), soundResouces1[6], 1 );
+				soundIds[7] = soundpool.load(getBaseContext(), soundResouces1[7], 1 );
+				soundIds[8] = soundpool.load(getBaseContext(), soundResouces1[8], 1 );
+				soundIds[9] = soundpool.load(getBaseContext(), soundResouces1[9], 1 );
+				soundIds[10] = soundpool.load(getBaseContext(), soundResouces1[10], 1 );
+				soundIds[11] = soundpool.load(getBaseContext(), soundResouces1[11], 1 );
+				soundIds[12] = soundpool.load(getBaseContext(), soundResouces1[12], 1 );
+				soundIds[13] = soundpool.load(getBaseContext(), soundResouces1[13], 1 );
+				soundIds[14] = soundpool.load(getBaseContext(), soundResouces1[14], 1 );
+				soundIds[15] = soundpool.load(getBaseContext(), soundResouces1[15], 1 );
 			
 				
 				start_button.setVisibility(View.INVISIBLE);
@@ -267,32 +286,29 @@ public class MainActivity extends Activity implements OnTouchListener {
 			@Override
 			public void onClick(View v) {
 				
-				/*soundpool.release();
+				soundpool.release();
 				soundpool = null;
-				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );*/
-				/*for(int i=0; i < timing.delay1.length; i++) {
-					
-				}
-				*/
+				soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );
+				/*for(int i=0; i < timing.delay1.length; i++) {	
+				}*/
 				
-				soundIds[0] = sound1.load(getBaseContext(), soundResouces2[0], 1 );
-				soundIds[1] = sound2.load(getBaseContext(), soundResouces2[1], 1 );
-				soundIds[2] = sound3.load(getBaseContext(), soundResouces2[2], 1 );
-				soundIds[3] = sound4.load(getBaseContext(), soundResouces2[3], 1 );
-				soundIds[4] = sound5.load(getBaseContext(), soundResouces2[4], 1 );
-				soundIds[5] = sound6.load(getBaseContext(), soundResouces2[5], 1 );
-				soundIds[6] = sound7.load(getBaseContext(), soundResouces2[6], 1 );
-				soundIds[7] = sound8.load(getBaseContext(), soundResouces2[7], 1 );
-				soundIds[8] = sound8.load(getBaseContext(), soundResouces2[8], 1 );
-				soundIds[9] = sound10.load(getBaseContext(), soundResouces2[9], 1 );
-				soundIds[10] = sound11.load(getBaseContext(), soundResouces2[10], 1 );
-				soundIds[11] = sound12.load(getBaseContext(), soundResouces2[11], 1 );
-				soundIds[12] = sound13.load(getBaseContext(), soundResouces2[12], 1 );
-				soundIds[13] = sound14.load(getBaseContext(), soundResouces2[13], 1 );
-				soundIds[14] = sound15.load(getBaseContext(), soundResouces2[14], 1 );
-				soundIds[15] = sound16.load(getBaseContext(), soundResouces2[15], 1 );	
+				soundIds[0] = soundpool.load(getBaseContext(), soundResouces2[0], 1 );
+				soundIds[1] = soundpool.load(getBaseContext(), soundResouces2[1], 1 );
+				soundIds[2] = soundpool.load(getBaseContext(), soundResouces2[2], 1 );
+				soundIds[3] = soundpool.load(getBaseContext(), soundResouces2[3], 1 );
+				soundIds[4] = soundpool.load(getBaseContext(), soundResouces2[4], 1 );
+				soundIds[5] = soundpool.load(getBaseContext(), soundResouces2[5], 1 );
+				soundIds[6] = soundpool.load(getBaseContext(), soundResouces2[6], 1 );
+				soundIds[7] = soundpool.load(getBaseContext(), soundResouces2[7], 1 );
+				soundIds[8] = soundpool.load(getBaseContext(), soundResouces2[8], 1 );
+				soundIds[9] = soundpool.load(getBaseContext(), soundResouces2[9], 1 );
+				soundIds[10] = soundpool.load(getBaseContext(), soundResouces2[10], 1 );
+				soundIds[11] = soundpool.load(getBaseContext(), soundResouces2[11], 1 );
+				soundIds[12] = soundpool.load(getBaseContext(), soundResouces2[12], 1 );
+				soundIds[13] = soundpool.load(getBaseContext(), soundResouces2[13], 1 );
+				soundIds[14] = soundpool.load(getBaseContext(), soundResouces2[14], 1 );
+				soundIds[15] = soundpool.load(getBaseContext(), soundResouces2[15], 1 );
 				
-				//
 				start_button.setVisibility(View.INVISIBLE);
 				//buttonの有効/無効化とテキストカラーの変更
 				music2_button.setTextColor(Color.parseColor("blue")); music2_button.setEnabled(false);
@@ -319,8 +335,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				timer.schedule(timertaskAni[9], 1900); timer.schedule(timertaskAni[10], 2000); timer.schedule(timertaskAni[11], 2100); 
 				timer.schedule(timertaskAni[12], 2200); timer.schedule(timertaskAni[13], 2300); timer.schedule(timertaskAni[14], 2400); 
 				timer.schedule(timertaskAni[15], 2500); */
-				
-				
 				
 				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
 					@Override
@@ -381,8 +395,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        start_button.setVisibility(View.INVISIBLE);
 				
 				// タイマー1をセット
-		        timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
-				timer =new Timer();
+		        /*timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
+				timer =new Timer();*/
 				timer.schedule(timerTask0,InterBGM);
 				
 				timerTask0.moveResult();
@@ -391,19 +405,23 @@ public class MainActivity extends Activity implements OnTouchListener {
 				StartTimeMillis = System.currentTimeMillis();
 				
 				
-				/*for(int i=0; i < timertaskAni.length; i++) {
+				for(int i=0; i < timertaskAni.length; i++) {
 					timertaskAni[i] = new AnimationTask(MainActivity.this,handler,tap_button[i]);
 				}
 				
 				for(int i=0; i < timing.delay1.length; i++) {
-					timer.schedule(timertaskAni[0], timing.delay1[i]+InterBGM-scheduleSetLagSum);
-				}*/
+					timer.schedule(timertaskAni[i], timing.delay1[i]+InterBGM-scheduleSetLagSum);
+				}
+				
+				
+				
+				
 				
 				
 				//ボタン1のアニメーションタイマー・タスクのセット
 				for(int i=0; i < timing.delay1.length; i++) {
-					timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
-					timer.schedule(timertaskAni[0], timing.delay1[i]+InterBGM-scheduleSetLagSum); 
+					/*timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
+					timer.schedule(timertaskAni[0], timing.delay1[i]+InterBGM-scheduleSetLagSum); */
 
 					timertaskNo[0] = new DataNoTask(MainActivity.this,handler,data1);
 					timer.schedule(timertaskNo[0], timing.delay1[i] + InterBGM-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -420,8 +438,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag2 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay2.length; i++) {
-					timertaskAni[1] = new AnimationTask(MainActivity.this,handler,tap_button[1]);
-					timer.schedule(timertaskAni[1], timing.delay2[i]+InterBGM-AniTimeLag2-scheduleSetLagSum); 
+					/*timertaskAni[1] = new AnimationTask(MainActivity.this,handler,tap_button[1]);
+					timer.schedule(timertaskAni[1], timing.delay2[i]+InterBGM-AniTimeLag2-scheduleSetLagSum); */
 
 					timertaskNo[1] = new DataNoTask(MainActivity.this,handler,data2);
 					timer.schedule(timertaskNo[1], timing.delay2[i] + InterBGM-AniTimeLag2-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -436,10 +454,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 				//ボタン3のアニメーションタイマー・タスクのセット
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag3 = ButtonTimeMillis- StartTimeMillis;
-				
 				for(int i=0; i < timing.delay3.length; i++) {
-					timertaskAni[2] = new AnimationTask(MainActivity.this,handler,tap_button[2]);
-					timer.schedule(timertaskAni[2], timing.delay3[i]+InterBGM-AniTimeLag3-scheduleSetLagSum); 
+					/*timertaskAni[2] = new AnimationTask(MainActivity.this,handler,tap_button[2]);
+					timer.schedule(timertaskAni[2], timing.delay3[i]+InterBGM-AniTimeLag3-scheduleSetLagSum);*/ 
 
 					timertaskNo[2] = new DataNoTask(MainActivity.this,handler,data3);
 					timer.schedule(timertaskNo[2], timing.delay3[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -455,8 +472,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag4 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay4.length; i++) {
-					timertaskAni[3] = new AnimationTask(MainActivity.this,handler,tap_button[3]);
-					timer.schedule(timertaskAni[3], timing.delay4[i]+InterBGM-AniTimeLag4-scheduleSetLagSum); 
+					/*timertaskAni[3] = new AnimationTask(MainActivity.this,handler,tap_button[3]);
+					timer.schedule(timertaskAni[3], timing.delay4[i]+InterBGM-AniTimeLag4-scheduleSetLagSum); */
 
 					timertaskNo[3] = new DataNoTask(MainActivity.this,handler,data4);
 					timer.schedule(timertaskNo[3], timing.delay4[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -472,8 +489,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag5 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay5.length; i++) {
-					timertaskAni[4] = new AnimationTask(MainActivity.this,handler,tap_button[4]);
-					timer.schedule(timertaskAni[4], timing.delay5[i]+InterBGM-AniTimeLag5-scheduleSetLagSum); 
+					/*timertaskAni[4] = new AnimationTask(MainActivity.this,handler,tap_button[4]);
+					timer.schedule(timertaskAni[4], timing.delay5[i]+InterBGM-AniTimeLag5-scheduleSetLagSum); */
 
 					timertaskNo[4] = new DataNoTask(MainActivity.this,handler,data5);
 					timer.schedule(timertaskNo[4] , timing.delay5[i] + InterBGM-AniTimeLag3-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -489,8 +506,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag6 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay6.length; i++) {	
-					timertaskAni[5] = new AnimationTask(MainActivity.this,handler,tap_button[5]);
-					timer.schedule(timertaskAni[5], timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); 
+					/*timertaskAni[5] = new AnimationTask(MainActivity.this,handler,tap_button[5]);
+					timer.schedule(timertaskAni[5], timing.delay6[i]+InterBGM-AniTimeLag6-scheduleSetLagSum); */
 					
 					timertaskNo[5] = new DataNoTask(MainActivity.this,handler,data6);
 					timer.schedule(timertaskNo[5], timing.delay6[i] +InterBGM-AniTimeLag6-scheduleSetLagSum + timing.AniDly-(timing.AniDly/2));
@@ -506,8 +523,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag7 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay7.length; i++) {	
-					timertaskAni[6] = new AnimationTask(MainActivity.this,handler,tap_button[6]);
-					timer.schedule(timertaskAni[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum); 
+					/*timertaskAni[6] = new AnimationTask(MainActivity.this,handler,tap_button[6]);
+					timer.schedule(timertaskAni[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum);*/ 
 					
 					timertaskNo[6] = new DataNoTask(MainActivity.this,handler,data7);
 					timer.schedule(timertaskNo[6], timing.delay7[i]+InterBGM-AniTimeLag7-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -523,8 +540,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag8 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay8.length; i++) {	
-					timertaskAni[7] = new AnimationTask(MainActivity.this,handler,tap_button[7]);
-					timer.schedule(timertaskAni[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);
+					/*timertaskAni[7] = new AnimationTask(MainActivity.this,handler,tap_button[7]);
+					timer.schedule(timertaskAni[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum);*/
 					
 					timertaskNo[7] = new DataNoTask(MainActivity.this,handler,data8);
 					timer.schedule(timertaskNo[7], timing.delay8[i]+InterBGM-AniTimeLag8-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -540,8 +557,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag9 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay9.length; i++) {	
-					timertaskAni[8] = new AnimationTask(MainActivity.this,handler,tap_button[8]);
-					timer.schedule(timertaskAni[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum);
+					/*timertaskAni[8] = new AnimationTask(MainActivity.this,handler,tap_button[8]);
+					timer.schedule(timertaskAni[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum);*/
 					
 					timertaskNo[8] = new DataNoTask(MainActivity.this,handler,data9);
 					timer.schedule(timertaskNo[8], timing.delay9[i]+InterBGM-AniTimeLag9-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -557,8 +574,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag10 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay10.length; i++) {	
-					timertaskAni[9]= new AnimationTask(MainActivity.this,handler,tap_button[9]);
-					timer.schedule(timertaskAni[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); 
+					/*timertaskAni[9]= new AnimationTask(MainActivity.this,handler,tap_button[9]);
+					timer.schedule(timertaskAni[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum); */
 					
 					timertaskNo[9] = new DataNoTask(MainActivity.this,handler,data10);
 					timer.schedule(timertaskNo[9], timing.delay10[i]+InterBGM-AniTimeLag10-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -574,8 +591,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag11 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay11.length; i++) {	
-					timertaskAni[10]= new AnimationTask(MainActivity.this,handler,tap_button[10]);
-					timer.schedule(timertaskAni[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum); 
+					/*timertaskAni[10]= new AnimationTask(MainActivity.this,handler,tap_button[10]);
+					timer.schedule(timertaskAni[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum);*/ 
 					
 					timertaskNo[10] = new DataNoTask(MainActivity.this,handler,data11);
 					timer.schedule(timertaskNo[10], timing.delay11[i]+InterBGM-AniTimeLag11-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -591,8 +608,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				ButtonTimeMillis = System.currentTimeMillis();
 				AniTimeLag12 = ButtonTimeMillis- StartTimeMillis;
 				for(int i=0; i < timing.delay12.length; i++) {	
-					timertaskAni[11]= new AnimationTask(MainActivity.this,handler,tap_button[11]);
-					timer.schedule(timertaskAni[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); 
+					/*timertaskAni[11]= new AnimationTask(MainActivity.this,handler,tap_button[11]);
+					timer.schedule(timertaskAni[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum); */
 					
 					timertaskNo[11] = new DataNoTask(MainActivity.this,handler,data12);
 					timer.schedule(timertaskNo[11], timing.delay12[i]+InterBGM-AniTimeLag12-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -609,8 +626,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag13 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay13.length; i++) {	
-					timertaskAni[12]= new AnimationTask(MainActivity.this,handler,tap_button[12]);
-					timer.schedule(timertaskAni[12], timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum); 
+					/*timertaskAni[12]= new AnimationTask(MainActivity.this,handler,tap_button[12]);
+					timer.schedule(timertaskAni[12], timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum); */
 					
 					timertaskNo[12] = new DataNoTask(MainActivity.this,handler,data13);
 					timer.schedule(timertaskNo[12] , timing.delay13[i]+InterBGM-AniTimeLag13-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -627,8 +644,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag14 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay14.length; i++) {	
-					timertaskAni[13]= new AnimationTask(MainActivity.this,handler,tap_button[13]);
-					timer.schedule(timertaskAni[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum); 
+					/*timertaskAni[13]= new AnimationTask(MainActivity.this,handler,tap_button[13]);
+					timer.schedule(timertaskAni[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum); */
 					
 					timertaskNo[13] = new DataNoTask(MainActivity.this,handler,data14);
 					timer.schedule(timertaskNo[13], timing.delay14[i]+InterBGM-AniTimeLag14-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -645,8 +662,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag15 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay15.length; i++) {	
-					timertaskAni[14]= new AnimationTask(MainActivity.this,handler,tap_button[14]);
-					timer.schedule(timertaskAni[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum); 
+					/*timertaskAni[14]= new AnimationTask(MainActivity.this,handler,tap_button[14]);
+					timer.schedule(timertaskAni[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum); */
 					
 					timertaskNo[14] = new DataNoTask(MainActivity.this,handler,data15);
 					timer.schedule(timertaskNo[14], timing.delay15[i]+InterBGM-AniTimeLag15-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -663,8 +680,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 				AniTimeLag16 = ButtonTimeMillis- StartTimeMillis;
 				
 				for(int i=0; i < timing.delay16.length; i++) {	
-					timertaskAni[15]= new AnimationTask(MainActivity.this,handler,tap_button[15]);
-					timer.schedule(timertaskAni[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); 
+					/*timertaskAni[15]= new AnimationTask(MainActivity.this,handler,tap_button[15]);
+					timer.schedule(timertaskAni[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum); */
 					
 					timertaskNo[15] = new DataNoTask(MainActivity.this,handler,data16);
 					timer.schedule(timertaskNo[15], timing.delay16[i]+InterBGM-AniTimeLag16-scheduleSetLagSum+timing.AniDly-(timing.AniDly/2));
@@ -722,7 +739,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		result.comboNo =0;
 		
 		data1.no=-1;data2.no=-1;data3.no=-1;data4.no=-1;data5.no=-1;data6.no=-1;data7.no=-1;data8.no=-1;
-		data1.no=-1;data9.no=-1;data10.no=-1;data11.no=-1;data12.no=-1;data13.no=-1;data14.no=-1;data15.no=-1;
+		data1.no=-1;data9.no=-1;data10.no=-1;data11.no=-1;data12.no=-1;data13.no=-1;data14.no=-1;data15.no=-1;data16.no=-1;
 		
 		//scoreをテキストビューに表示
 		String stringscore = String.valueOf(result.score());
@@ -737,16 +754,18 @@ public class MainActivity extends Activity implements OnTouchListener {
 		start_button.setVisibility(View.VISIBLE);
 	}
 
-	
+	 // 音をロードしておく
 	@Override
 	protected void onResume() {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onResume();
+		
+		 timerTask0 = new BGMTask(MainActivity.this,MainActivity.this,result,mediaplayer);
+			timer =new Timer();
 
-	    // 音をロードしておく
-		//soundpoolクラス16個をnewで作成
-				
-				sound1 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
+	   //soundpoolクラス16個をnewで作成
+		soundpool = new SoundPool( 16, AudioManager.STREAM_MUSIC, 0 );
+				/*sound1 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 				sound2 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 				sound3 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 				sound4 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
@@ -762,8 +781,8 @@ public class MainActivity extends Activity implements OnTouchListener {
 		        sound14 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 		        sound15 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
 		        sound16 = new SoundPool( 1, AudioManager.STREAM_MUSIC, 0 );
-				
-		        sound1.setOnLoadCompleteListener(new OnLoadCompleteListener(){
+				*/
+		        soundpool.setOnLoadCompleteListener(new OnLoadCompleteListener(){
 
 					@Override
 					public void onLoadComplete(SoundPool arg0, int arg1,
@@ -773,30 +792,10 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 					
 				});
-		        sound10.setOnLoadCompleteListener(new OnLoadCompleteListener(){
-
-					@Override
-					public void onLoadComplete(SoundPool arg0, int arg1,
-							int arg2) {
-						// TODO 自動生成されたメソッド・スタブ
-						Log.d("aaaaa", String.format("dddddd_%d:%d ", arg1,arg2));
-					}
-					
-				});
-		        sound16.setOnLoadCompleteListener(new OnLoadCompleteListener(){
-
-					@Override
-					public void onLoadComplete(SoundPool arg0, int arg1,
-							int arg2) {
-						// TODO 自動生成されたメソッド・スタブ
-						Log.d("aaaaa", String.format("dddddd_%d:%d ", arg1,arg2));
-					}
-					
-				});
-				
+		        
 		        
 				soundIds = new int[16];
-				soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
+				/*soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
 				soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
 				soundIds[2] = sound3.load(this, soundResouces1[2], 1 );
 				soundIds[3] = sound4.load(this, soundResouces1[3], 1 );
@@ -811,42 +810,24 @@ public class MainActivity extends Activity implements OnTouchListener {
 				soundIds[12] = sound13.load(this, soundResouces1[12], 1 );
 				soundIds[13] = sound14.load(this, soundResouces1[13], 1 );
 				soundIds[14] = sound15.load(this, soundResouces1[14], 1 );
-				soundIds[15] = sound16.load(this, soundResouces1[15], 1 );
+				soundIds[15] = sound16.load(this, soundResouces1[15], 1 );*/
 				
-				/*soundIds = new int[16];
-				soundIds[0] = soundpool.load(this, soundResouces2[1], 1 );
+				soundIds[0] = soundpool.load(this, soundResouces1[0], 1 );
 				soundIds[1] = soundpool.load(this, soundResouces1[1], 1 );
-				soundIds[2] = soundIds[0];
-				soundIds[3] = soundIds[0];
-				soundIds[4] = soundIds[0];
-				soundIds[5] = soundpool.load(this, soundResouces1[2], 1 );
-				soundIds[6] = soundpool.load(this, soundResouces1[3], 1 );
-				soundIds[7] = soundpool.load(this, soundResouces1[4], 1 );
-				soundIds[8] = soundIds[0];
-				soundIds[9] = soundpool.load(this, soundResouces1[5], 1 );
-				soundIds[10] = soundpool.load(this, soundResouces1[6], 1 );
-				soundIds[11] = soundpool.load(this, soundResouces1[7], 1 );
-				soundIds[12] = soundIds[0];
-				soundIds[13] = soundIds[0];
-				soundIds[14] = soundIds[0];
-				soundIds[15] = soundpool.load(this, soundResouces1[8], 1 );*/
-				
-				/*soundIds[0] = sound1.load(this, soundResouces1[0], 1 );
-				soundIds[1] = sound2.load(this, soundResouces1[1], 1 );
-				soundIds[2] = sound3.load(this, soundResouces1[0], 1 );
-				soundIds[3] = sound4.load(this, soundResouces1[0], 1 );
-				soundIds[4] = sound5.load(this, soundResouces1[0], 1 );
-				soundIds[5] = sound6.load(this, soundResouces1[2], 1 );
-				soundIds[6] = sound7.load(this, soundResouces1[3], 1 );
-				soundIds[7] = sound8.load(this, soundResouces1[4], 1 );
-				soundIds[8] = sound9.load(this, soundResouces1[0], 1 );
-				soundIds[9] = sound10.load(this, soundResouces1[5], 1 );
-				soundIds[10] = sound11.load(this, soundResouces1[6], 1 );
-				soundIds[11] = sound12.load(this, soundResouces1[7], 1 );
-				soundIds[12] = sound13.load(this, soundResouces1[0], 1 );
-				soundIds[13] = sound14.load(this, soundResouces1[0], 1 );
-				soundIds[14] = sound15.load(this, soundResouces1[0], 1 );
-				soundIds[15] = sound16.load(this, soundResouces1[8], 1 );	*/
+				soundIds[2] = soundpool.load(this, soundResouces1[2], 1 );
+				soundIds[3] = soundpool.load(this, soundResouces1[3], 1 );
+				soundIds[4] = soundpool.load(this, soundResouces1[4], 1 );
+				soundIds[5] = soundpool.load(this, soundResouces1[5], 1 );
+				soundIds[6] = soundpool.load(this, soundResouces1[6], 1 );
+				soundIds[7] = soundpool.load(this, soundResouces1[7], 1 );
+				soundIds[8] = soundpool.load(this, soundResouces1[8], 1 );
+				soundIds[9] = soundpool.load(this, soundResouces1[9], 1 );
+				soundIds[10] = soundpool.load(this, soundResouces1[10], 1 );
+				soundIds[11] = soundpool.load(this, soundResouces1[11], 1 );
+				soundIds[12] = soundpool.load(this, soundResouces1[12], 1 );
+				soundIds[13] = soundpool.load(this, soundResouces1[13], 1 );
+				soundIds[14] = soundpool.load(this, soundResouces1[14], 1 );
+				soundIds[15] = soundpool.load(this, soundResouces1[15], 1 );
 	}
 
 	@Override
@@ -854,7 +835,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 		// TODO 自動生成されたメソッド・スタブ
 		super.onPause();
 	    // 音をリリース
-	    sound1.release();
+	    soundpool.release();
 	}
 
 		
@@ -884,7 +865,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 			switch (v.getId()) {
 				//button1を押した場合
 				case R.id.TapButton1:
-					sound1.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[0], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data1.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -930,7 +911,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button2を押した場合
 				case R.id.TapButton2:
-					sound2.play(soundIds[1], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[1], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data2.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -976,7 +957,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button3を押した場合
 				case R.id.TapButton3:
-					sound3.play(soundIds[2], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[2], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data3.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1022,7 +1003,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button4を押した場合
 				case R.id.TapButton4:
-					sound4.play(soundIds[3], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[3], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data4.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1068,7 +1049,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button5を押した場合
 				case R.id.TapButton5:
-					sound5.play(soundIds[4], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[4], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data5.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1114,7 +1095,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button6を押した場合
 				case R.id.TapButton6:
-					sound6.play(soundIds[5], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[5], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data6.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1159,7 +1140,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 				break;
 				case R.id.TapButton7:
-					sound7.play(soundIds[6], 0.5F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[6], 0.5F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data7.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1204,7 +1185,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 				break;
 				case R.id.TapButton8:
-					sound8.play(soundIds[7], 0.5F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[7], 0.5F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data8.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1250,7 +1231,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button9を押した場合
 				case R.id.TapButton9:
-					sound9.play(soundIds[8], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[8], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data9.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1296,7 +1277,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button10を押した場合
 				case R.id.TapButton10:
-					sound10.play(soundIds[9], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[9], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data10.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1342,7 +1323,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button11を押した場合
 				case R.id.TapButton11:
-					sound11.play(soundIds[10], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[10], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data11.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1388,7 +1369,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button12を押した場合
 				case R.id.TapButton12:
-					sound12.play(soundIds[11], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[11], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data12.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1434,7 +1415,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;		
 				//button13を押した場合
 				case R.id.TapButton13:
-					sound13.play(soundIds[12], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[12], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data13.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1480,7 +1461,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button14を押した場合
 				case R.id.TapButton14:
-					sound14.play(soundIds[13], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[13], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data14.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1526,7 +1507,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 				break;
 				//button15を押した場合
 				case R.id.TapButton15:
-					sound15.play(soundIds[14], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[14], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
 					if(data15.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
@@ -1571,8 +1552,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 					}
 				break;
 				case R.id.TapButton16:
-					sound16.play(soundIds[15], 1.0F, 1.0F, 0, 0, 1.0F);
+					soundpool.play(soundIds[15], 1.0F, 1.0F, 0, 0, 1.0F);
 					scheduleSetLagSum =0;
+					Log.d("ddddd", "aaaaa");
 					if(data16.getFlag() ==0) {
 						TextView textView1 = (TextView) findViewById(R.id.valueView);
 						textView1.setText("ボタン押しても無視");
@@ -1632,67 +1614,67 @@ public class MainActivity extends Activity implements OnTouchListener {
 			switch (v.getId()) {
 			case R.id.TapButton1:
 				button_1.setBackgroundResource(android.R.drawable.btn_default);
-				sound1.stop(soundIds[0]);
+				soundpool.stop(soundIds[0]);
 				break;
 			case R.id.TapButton2:
 				button_2.setBackgroundResource(android.R.drawable.btn_default);
-				sound2.stop(soundIds[1]);
+				soundpool.stop(soundIds[1]);
 				break;
 			case R.id.TapButton3:
 				button_3.setBackgroundResource(android.R.drawable.btn_default);
-				sound3.stop(soundIds[2]);
+				soundpool.stop(soundIds[2]);
 				break;
 			case R.id.TapButton4:
 				button_4.setBackgroundResource(android.R.drawable.btn_default);
-				sound4.stop(soundIds[3]);
+				soundpool.stop(soundIds[3]);
 				break;
 			case R.id.TapButton5:
 				button_5.setBackgroundResource(android.R.drawable.btn_default);
-				sound5.stop(soundIds[4]);
+				soundpool.stop(soundIds[4]);
 				break;
 			case R.id.TapButton6:
 				button_6.setBackgroundResource(android.R.drawable.btn_default);
-				sound6.stop(soundIds[5]);
+				soundpool.stop(soundIds[5]);
 				break;
 			case R.id.TapButton7:
 				button_7.setBackgroundResource(android.R.drawable.btn_default);
-				sound7.stop(soundIds[6]);
+				soundpool.stop(soundIds[6]);
 				break;
 			case R.id.TapButton8:
 				button_8.setBackgroundResource(android.R.drawable.btn_default);
-				sound8.stop(soundIds[7]);
+				soundpool.stop(soundIds[7]);
 				break;
 			case R.id.TapButton9:
 				button_9.setBackgroundResource(android.R.drawable.btn_default);
-				sound9.stop(soundIds[8]);
+				soundpool.stop(soundIds[8]);
 				break;
 			case R.id.TapButton10:
 				button_10.setBackgroundResource(android.R.drawable.btn_default);
-				sound10.stop(soundIds[9]);
+				soundpool.stop(soundIds[9]);
 				break;
 			case R.id.TapButton11:
 				button_11.setBackgroundResource(android.R.drawable.btn_default);
-				sound11.stop(soundIds[10]);
+				soundpool.stop(soundIds[10]);
 				break;
 			case R.id.TapButton12:
 				button_12.setBackgroundResource(android.R.drawable.btn_default);
-				sound12.stop(soundIds[11]);
+				soundpool.stop(soundIds[11]);
 				break;
 			case R.id.TapButton13:
 				button_13.setBackgroundResource(android.R.drawable.btn_default);
-				sound13.stop(soundIds[12]);
+				soundpool.stop(soundIds[12]);
 				break;
 			case R.id.TapButton14:
 				button_14.setBackgroundResource(android.R.drawable.btn_default);
-				sound14.stop(soundIds[13]);
+				soundpool.stop(soundIds[13]);
 				break;
 			case R.id.TapButton15:
 				button_15.setBackgroundResource(android.R.drawable.btn_default);
-				sound15.stop(soundIds[14]);
+				soundpool.stop(soundIds[14]);
 				break;
 			case R.id.TapButton16:
 				button_16.setBackgroundResource(android.R.drawable.btn_default);
-				sound16.stop(soundIds[15]);
+				soundpool.stop(soundIds[15]);
 				break;
 			}
             return true;
@@ -1708,8 +1690,8 @@ public class MainActivity extends Activity implements OnTouchListener {
         timerTask0.stopBGM();
         timer.cancel();    
     	super.onDestroy();
-    }*/
-
+    }
+*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

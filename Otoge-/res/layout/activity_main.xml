@@ -48,7 +48,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
 
@@ -57,7 +57,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="First Kitchen" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title1"  />
 
 
                 <Button
@@ -65,7 +66,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="Fuck Up" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title2"/>
 
 
                 <Button
@@ -73,7 +75,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:text="MUSIC C" />
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/title3" />
             </LinearLayout>
         </ScrollView>
 
@@ -588,17 +591,16 @@
         android:layout_weight="1"
         android:orientation="vertical" >
 
-
         <TextView
             android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="3"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/txtback01"
             android:padding="5dp"
             android:textColor="#ffffffff" />
-
 
         <TextView
             android:id="@+id/textView2"
@@ -606,6 +608,7 @@
             android:layout_height="0dp"
             android:layout_gravity="center"
             android:layout_weight="3"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:background="@drawable/txtback01"
             android:padding="5dp"
             android:textColor="#ffffffff" />
@@ -619,7 +622,7 @@
             android:layout_weight="3"
             android:background="@drawable/txtback01"
             android:padding="5dp"
-            android:text="ここにバリューを表示"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#ffffffff" />
 
 
