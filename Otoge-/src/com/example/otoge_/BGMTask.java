@@ -46,6 +46,8 @@ public class BGMTask extends TimerTask {
         	mediaplayer = null;
 
         } else {
+        	mediaplayer.release();
+        	mediaplayer = null;
         }
 	}
 	
@@ -67,7 +69,10 @@ public class BGMTask extends TimerTask {
 		        intent.putExtra("maxScore",result.scoreMax());
 		        intent.putExtra("returnscoreAve",(int)result.scoreAve());
 		        activity.startActivity(intent);
+		        
 			}
+			
+			
 		});	
 	}
 	
