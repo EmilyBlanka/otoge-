@@ -1,4 +1,4 @@
-package com.example.otoge_;
+package jp.ed.human.android2013.BeaTap;
 
 public class ResultData {
 	//フィールド変数
@@ -18,12 +18,13 @@ public class ResultData {
 	//メソッド
 	void greatPointUp(){this.score=score+70;}
 	void goodPointUp(){this.score=score+30;}
-	
+		
 	void greatNoUp() {this.greatNo++;}
 	void goodNoUp() {this.goodNo++;}
 	void badNoUp() {this.badNo++;}
 	void comboNoUp() {this.comboNo++;}
 	void comboNoRes() {this.comboNo=0;}
+	void setMaxComboNo(int MaxComboNo) {this.MaxComboNo=MaxComboNo;}
 	
 	int score() {return score;}
 	int comboNo() {return comboNo;}

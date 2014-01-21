@@ -1,8 +1,11 @@
-package com.example.otoge_;
+package jp.ed.human.android2013.BeaTap;
 
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.example.otoge_.R;
+
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
@@ -11,6 +14,7 @@ import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.renderscript.Sampler.Value;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
@@ -134,7 +138,7 @@ public class MainActivity extends Activity implements OnTouchListener {
         
         music1_button = (Button) findViewById(R.id.musicbutton1);
         music2_button = (Button) findViewById(R.id.musicbutton2);
-        music3_button = (Button)findViewById(R.id.musicbutton3);
+       
       
         tap_button[0] = (ImageView) findViewById(R.id.TapImage1);
         tap_button[1] = (ImageView) findViewById(R.id.TapImage2);
@@ -220,6 +224,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 				timer.schedule(timerTask0,1000);
 				
 				timing.setmusic1();
+				MaxComboNo=(timing.delay2.length)+(timing.delay6.length)+(timing.delay7.length)+(timing.delay8.length)+
+						(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);
+				result.setMaxComboNo(MaxComboNo);
+				
+				Log.d("aaa", String.valueOf(MaxComboNo));
 				
 				//BGM終了後の処理
 				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
@@ -304,6 +313,11 @@ public class MainActivity extends Activity implements OnTouchListener {
 				timer.schedule(timerTask0,1000);
 				
 				timing.setmusic2();
+				MaxComboNo=(timing.delay2.length)+(timing.delay6.length)+(timing.delay7.length)+(timing.delay8.length)+
+						(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);
+				result.setMaxComboNo(MaxComboNo);
+				
+				Log.d("aaa", String.valueOf(MaxComboNo));
 				
 				//ドラムロール時のタイミングとボタンのアニメーション
 				/*timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
@@ -349,14 +363,14 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
     
-        music3_button.setOnClickListener(new View.OnClickListener() {
+        /*music3_button.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				timing.setmusic2();
 				
 			}
 		});
-        
+        */
 	}
 	
 		
@@ -465,6 +479,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 	    mediaplayer.release(); mediaplayer = null;
 	    
         timer.cancel();     
+        start_button.setVisibility(View.VISIBLE);
 	}
 
 	
@@ -774,6 +789,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 			}
 		});
 		
+		/*MaxComboNo=(timing.delay2.length)+(timing.delay6.length)+(timing.delay7.length)+(timing.delay8.length)+
+				(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);*/
+		
 		//returnボタンを押した場合の処理
 		return_button.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -805,9 +823,9 @@ public class MainActivity extends Activity implements OnTouchListener {
 		public boolean onTouch(View v, MotionEvent event) {
 			// TODO Auto-generated method stub
 			
-			int GreLan =80;
-			int GodLan =70;
-			int BadLan =45;
+			int GreLan =100;
+			int GodLan =50;
+			int BadLan =37;
 			
 			TouchTimeMillis = System.currentTimeMillis();
 			Time =TouchTimeMillis-StartTimeMillis;
@@ -1570,78 +1588,78 @@ public class MainActivity extends Activity implements OnTouchListener {
 				switch (v.getId()) {
 				case R.id.TapButton1:
 					button_1.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[0]);
+					//soundpool.stop(soundIds[0]);
 					break;
 				case R.id.TapButton2:
 					button_2.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[1]);
+					//soundpool.stop(soundIds[1]);
 					break;
 				case R.id.TapButton3:
 					button_3.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[2]);
+					//soundpool.stop(soundIds[2]);
 					break;
 				case R.id.TapButton4:
 					button_4.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[3]);
+					//soundpool.stop(soundIds[3]);
 					break;
 				case R.id.TapButton5:
 					button_5.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[4]);
+					//soundpool.stop(soundIds[4]);
 					break;
 				case R.id.TapButton6:
 					button_6.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[5]);
+					//soundpool.stop(soundIds[5]);
 					break;
 				case R.id.TapButton7:
 					button_7.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[6]);
+					//soundpool.stop(soundIds[6]);
 					break;
 				case R.id.TapButton8:
 					button_8.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[7]);
+					//soundpool.stop(soundIds[7]);
 					break;
 				case R.id.TapButton9:
 					button_9.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[8]);
+					//soundpool.stop(soundIds[8]);
 					break;
 				case R.id.TapButton10:
 					button_10.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[9]);
+					//soundpool.stop(soundIds[9]);
 					break;
 				case R.id.TapButton11:
 					button_11.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[10]);
+					//soundpool.stop(soundIds[10]);
 					break;
 				case R.id.TapButton12:
 					button_12.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[11]);
+					//soundpool.stop(soundIds[11]);
 					break;
 				case R.id.TapButton13:
 					button_13.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[12]);
+					//soundpool.stop(soundIds[12]);
 					break;
 				case R.id.TapButton14:
 					button_14.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[13]);
+					//soundpool.stop(soundIds[13]);
 					break;
 				case R.id.TapButton15:
 					button_15.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[14]);
+					//soundpool.stop(soundIds[14]);
 					break;
 				case R.id.TapButton16:
 					button_16.setBackgroundResource(android.R.drawable.btn_default);
-					soundpool.stop(soundIds[15]);
+					//soundpool.stop(soundIds[15]);
 					break;
 				}
 	            return true;
 	        }
 			return false;
 		}
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
+    }*/
  
 }

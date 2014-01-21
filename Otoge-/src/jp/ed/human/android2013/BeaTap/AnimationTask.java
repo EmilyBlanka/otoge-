@@ -1,6 +1,9 @@
-package com.example.otoge_;
+package jp.ed.human.android2013.BeaTap;
 
 import java.util.TimerTask;
+
+import com.example.otoge_.R;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.Handler;

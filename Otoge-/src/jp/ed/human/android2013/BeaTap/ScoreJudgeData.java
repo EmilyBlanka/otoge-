@@ -1,4 +1,4 @@
-package com.example.otoge_;
+package jp.ed.human.android2013.BeaTap;
 
 public class ScoreJudgeData {
 	
