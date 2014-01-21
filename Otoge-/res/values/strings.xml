@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Otoge-</string>
+    <string name="app_name">BeaTap</string>
     <string name="action_settings">Settings</string>
     <string name="rank">RANK:</string>
     <string name="rank1">RANK表示</string>
@@ -21,4 +21,7 @@
 	<string name="title2">F××k Up</string>
 	<string name="title3">MUSIC3</string>
 	<string name="title">MUSIC</string>
+	
+    <string name="title_activity_banner_sample">DFP Banner Sample</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -1,7 +1,5 @@
 package jp.ed.human.android2013.BeaTap;
 
-import com.example.otoge_.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

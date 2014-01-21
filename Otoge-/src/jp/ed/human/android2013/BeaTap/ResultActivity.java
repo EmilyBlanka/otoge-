@@ -1,7 +1,5 @@
 package jp.ed.human.android2013.BeaTap;
 
-import com.example.otoge_.R;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -12,7 +10,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import com.google.android.gms.ads.*;
+
+
 
 public class ResultActivity extends Activity {
 	//ä˘ë∂èÓïÒ(maxcomboÇÃêîÇ∆maxscore)
@@ -27,17 +29,22 @@ public class ResultActivity extends Activity {
 	private int tempobadNo;
 	private int tempoScoreAve;
 	
-	Button	continue_button, end_button;
+	Button	continue_button;
 	
 	ImageView rank;
-
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_result);
 		
-		continue_button = (Button)findViewById(R.id.continue_button);
+		// Look up the AdView as a resource and load a request.
+	    AdView adView = (AdView)this.findViewById(R.id.adView);
+	    AdRequest adRequest = new AdRequest.Builder().build();
+	    adView.loadAd(adRequest);
+	  
+	    continue_button = (Button)findViewById(R.id.continue_button);
 		
 		rank = (ImageView) findViewById(R.id.imageView1);
 		
@@ -108,16 +115,6 @@ public class ResultActivity extends Activity {
 			}
 		});
 		
-		/*end_button.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				finish();
-			
-		
-			
-	
-			}
-		});*/
 	}
 
 		

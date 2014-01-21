@@ -3,9 +3,6 @@ package jp.ed.human.android2013.BeaTap;
 import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import com.example.otoge_.R;
-
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
