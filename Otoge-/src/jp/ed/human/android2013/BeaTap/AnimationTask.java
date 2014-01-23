@@ -31,7 +31,6 @@ public class AnimationTask extends TimerTask {
 			 @Override
 			 public void run() {
 				 img.startAnimation(anim1);
-				 Log.d("animation", img.toString());
 				 
 			      }
 			    });

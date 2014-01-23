@@ -7,16 +7,12 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.media.SoundPool.OnLoadCompleteListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.renderscript.Sampler.Value;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -225,7 +221,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 						(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);
 				result.setMaxComboNo(MaxComboNo);
 				
-				Log.d("aaa", String.valueOf(MaxComboNo));
 				
 				//BGM終了後の処理
 				mediaplayer.setOnCompletionListener(new OnCompletionListener() {	
@@ -313,8 +308,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 				MaxComboNo=(timing.delay2.length)+(timing.delay6.length)+(timing.delay7.length)+(timing.delay8.length)+
 						(timing.delay10.length)+(timing.delay11.length)+(timing.delay12.length)+(timing.delay16.length);
 				result.setMaxComboNo(MaxComboNo);
-				
-				Log.d("aaa", String.valueOf(MaxComboNo));
 				
 				//ドラムロール時のタイミングとボタンのアニメーション
 				/*timertaskAni[0] = new AnimationTask(MainActivity.this,handler,tap_button[0]);
@@ -1530,7 +1523,6 @@ public class MainActivity extends Activity implements OnTouchListener {
 					case R.id.TapButton16:
 						soundpool.play(soundIds[15], 1.0F, 1.0F, 0, 0, 1.0F);
 						scheduleSetLagSum =0;
-						Log.d("ddddd", "aaaaa");
 						if(data16.getFlag() ==0) {
 							TextView textView1 = (TextView) findViewById(R.id.valueView);
 							textView1.setText("");

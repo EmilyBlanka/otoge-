@@ -21,7 +21,5 @@
 	<string name="title2">F××k Up</string>
 	<string name="title3">MUSIC3</string>
 	<string name="title">MUSIC</string>
-	
-    <string name="title_activity_banner_sample">DFP Banner Sample</string>
-    <string name="refresh">Refresh</string>
+
 </resources>
