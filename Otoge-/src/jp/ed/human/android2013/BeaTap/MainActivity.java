@@ -1105,7 +1105,7 @@ public class MainActivity extends Activity implements OnTouchListener {
 						soundpool.play(soundIds[5], 1.0F, 1.0F, 0, 0, 1.0F);
 						scheduleSetLagSum =0;
 						//Log.d("6button f", String.valueOf(data6.getFlag()));
-						//Log.d("6button n", String.valueOf(data6.getNo()));
+						Log.d("6button n", String.valueOf(data6.getNo()));
 						if(data6.getFlag() ==0) {
 							TextView textView1 = (TextView) findViewById(R.id.valueView);
 							textView1.setText("");
